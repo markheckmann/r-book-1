@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Grundlagen der Sprache &middot; R you ready?</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/magnific-popup.css" rel="stylesheet"> 
+    <link href="css/bootstrap.min-unlimited.css" rel="stylesheet">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="css/highlight.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' 
+    rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="masthead">
+  <ul class="nav nav-pills pull-right">
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        Kapitelübersicht<b class="caret"></b>
+      </a>
+      <ul id="chaptermenu" class="dropdown-menu" role="menu">
+        <li class="dropdown-header">Allgemeines</li>
+<li><a href="inhalt.html">Kapitelübersicht</a></li>
+<li><a href="about.html">Über diese Seite</a></li>
+
+<li class="dropdown-header">Basics</li>
+<li><a href="einstiegsbeispiel.html">Einstiegsbeispiel</a></li>
+<li><a href="grundlagen.html">Grundlagen der Sprache</a></li>
+<li><a href="rlernen.html">R Lernen</a></li>
+
+      </ul>
+    </li>
+  </ul>
+
+  <h3 class="muted"><a href="/">R you ready?</a> <small>von Mark Heckmann</small></h3>
+  <hr>
+</div>
+
+ 
+      <div class="row">
+        <div class="col-sm-3" id="nav">
+          <h4>Inhalt des Kapitels</h4>
+          <ul class="list-unstyled" id="toc"></ul>
+  
+          <hr>
+          <p><a href="/contribute.html">Beitragen</a></p>
+
+          <p><a class="btn btn-primary" href="https://github.com/hadley/adv-r/edit/master/grundlagen.rmd">Diese Seite bearbeiten</a></p>
+        </div>
+
+        <div id="content" class="col-sm-8 pull-right">          
+          <h1 id="grundlagen-der-sprache">Grundlagen der Sprache</h1>
+<div class='bs-docs-example'>
+  <ul>
+    <li> 
+Die ersten Befehle in R eingeben
+</li> 
+     <li> 
+Einen Eindruck vom Umgang mit R bekommen
+</li> 
+  </ul>
+</div>
+
+<p>Dieses Kapitel führt in die grundlegende Funktionsweise der Sprache ein. Wie bei jeder Sprache tauchen dabei Begriffe auf, die unbekannt oder ungewohnt sind bzw. in der jeweiligen Sprache eine besondere Bedeutung haben. Lassen Sie sich von Begriffen wie <em>Objekt</em>, <em>Funktion</em> oder <em>Operator</em> nicht abschrecken. Am Ende des Buches werden diese zu ihrem -Standard-Wortschatz zählen und ihre Bedeutung innerhalb von wird verständlich sein.</p>
+<h2 id="r-als-taschenrechner">R als Taschenrechner</h2>
+<p>funktioniert interaktiv in einem <em>Frage-Anwort Modus</em>. Wenn man z.B. etwas in die Konsole eingibt und die Eingabetaste drückt, wird das Eingegebene ausgewertet. Auf diese Weise kann wie ein Taschenrechner genutzt werden:</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="dv">1</span> +<span class="st"> </span><span class="dv">1</span>
+
+[<span class="dv">1</span>] <span class="dv">2</span></code></pre>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="dv">10</span> -<span class="st"> </span><span class="dv">5</span>
+
+[<span class="dv">1</span>] <span class="dv">5</span></code></pre>
+<p>Wie im vorangehenden Beispiel deutlich wird, können die grundlegenden arithmetischen Operationen (d.h.<code>+ - * /</code>)genutzt werden. Klammern können in der üblichen Weise verwendet werden und markieren den Vorrang einer Operation vor einer anderen Operation.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="dv">3</span> *<span class="st"> </span>(<span class="dv">1+1</span>)
+
+[<span class="dv">1</span>] <span class="dv">6</span></code></pre>
+<pre class="sourceCode R"><code class="sourceCode r">(<span class="dv">2+2</span>)/(<span class="dv">1+1</span>)
+
+[<span class="dv">1</span>] <span class="dv">2</span></code></pre>
+<p>Pro Zeile können ein oder mehrere Befehle in die Konsole eingegeben werden. Wenn mehrere Befehle in einer Zeile stehen, muss das Ende jedes einzelnen Befehls durch ein Semikolon (<code>;</code>) gekennzeichnet werden. Ein Semikolon markiert in jeweils das Ende eines Befehls. Für den letzten Befehl in einer Zeile kann das Semikolon weggelassen werden. Da es üblich ist, nur einen Befehl pro Zeile zu schreiben, findet man selten Semikolons im Code.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="dv">1</span> +<span class="st"> </span><span class="dv">1</span>; <span class="dv">2</span> +<span class="st"> </span><span class="dv">2</span>; <span class="dv">3</span> +<span class="st"> </span><span class="dv">3</span>
+
+[<span class="dv">1</span>] <span class="dv">6</span></code></pre>
+<p>Befehle können sich auch über mehrere Zeilen erstrecken. überprüft jeweils die eingegeben Befehle. Wenn ein Befehl am Ende einer Zeile oder bei einem eingefügten Zeilenumbruch noch nicht abgeschlossen ist, wird das Ende eines Befehls in den nachfolgenden Zeilen suchen. Der Befehl wird erst dann ausgeführt, wenn er vollständig ist. Im nachfolgenden Beispiel erwartet noch eine weitere Ziffer, da die Zeile mit einem Minus-Zeichen endet und der Befehl somit noch nicht vollständig ist. Dass ein Befehl noch nicht abgeschlossen ist zeigt dadurch an, dass es anstatt dem üblichen Größer-Als-Zeichen (<code>&gt;</code>) ein Pluszeichen am Zeilenanfang ausgibt. Lassen Sie sich durch das Pluszeichen nicht verwirren, es dient nur als Hinweis, dass noch ein Teil des Befehls fehlt.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="dv">1</span> -<span class="st"> </span><span class="dv">2</span> -<span class="st"> </span><span class="dv">3</span> -<span class="st"> </span>
+<span class="st">  </span><span class="dv">4</span> -<span class="st"> </span><span class="dv">5</span>
+
+[<span class="dv">1</span>] -<span class="dv">13</span></code></pre>
+<p>Manchmal kommt es vor, dass man Fehler in den Code einbaut, die dazu führen, dass immer weiter auf den Abschluss des Befehls wartet. In diesem Fall kann die Eingabe durch das Drücken der <em>Escape</em>-Taste abgebrochen werden.</p>
+<h4 id="grundlegende-arithmetische-operationen">Grundlegende Arithmetische Operationen</h4>
+<p>Wie bereits dargestellt wurde, können in die grundlegenden arithmetischen Operationen, wie sie aus dem Taschenrechner bekannt sind, genutzt werden. Hierbei gilt die übliche Auswertungsreihenfolge von Operatoren (Punkt- vor Strichrechnung). Eine Liste der grundlegenden arithmetischen Operationen findet sich in Tabelle XXX.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Operator</th>
+<th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>4 + 4</code></td>
+<td align="left">Addition</td>
+</tr>
+<tr class="even">
+<td align="left"><code>4 / 4</code></td>
+<td align="left">Division</td>
+</tr>
+</tbody>
+</table>
+<p>Geben Sie folgende Beispiele ein und schauen Sie, was passiert.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="dv">5</span>^<span class="dv">2</span>
+
+[<span class="dv">1</span>] <span class="dv">25</span></code></pre>
+<h2 id="kommentare-im-code">Kommentare im Code</h2>
+<p>Die Raute (<code>#</code>) hat in eine besondere Bedeutung. Sie leitet sogenannte <em>Kommentare</em> ein. Alles was in einer Zeile hinter der Raute steht, wird von nicht ausgewertet und dient dazu, den Code zu kommentieren. Kommentare sind sehr wichtig, um die eigenen Analysen auch nach Monaten noch nachvollziehen zu können oder dies anderen zu ermöglichen. An Kommentaren sollten Sie nicht sparen! Guter Code enthält stets ausreichend Kommentare, um Dritten den Code verständlich zu machen.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="dv">1</span> +<span class="st"> </span><span class="dv">1</span>      <span class="co"># Hier gehört die Erklärung der Analyse hin</span>
+
+[<span class="dv">1</span>] <span class="dv">2</span></code></pre>
+<p>Schauen Sie sich noch einmal den Code aus dem <em>Beispiel zum Schnelleinstieg</em> von Seite an. Dort sehen Sie, wie in jeder Zeile Kommentare stehen, die beschreiben, was gerechnet wird.</p>
+<p>Außer dafür, Erklärungen in den Code zu schreiben, wird das Kommentarzeichen häufig genutzt, Code <em>auszukommentieren</em>. Denn eine Raute führt dazu, dass alles hinter der Raute als Kommentar interpretiert und nicht ausgeführt wird. Somit bewirkt eine Raute <em>vorm</em> -Code, dass dieser nicht ausgeführt wird. Dies kann nützlich sein, wenn Teile einer Analyse zeitweise nicht mehr ausgeführt werden sollen. Nachfolgend wird <code>1 + 1</code> gerechnet, <code>2 + 2</code> jedoch nicht, da es als Kommentar gekennzeichnet ist.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="dv">1</span> +<span class="st"> </span><span class="dv">1</span>    <span class="co"># eins plus eins</span>
+
+[<span class="dv">1</span>] <span class="dv">2</span></code></pre>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="co"># 2 + 2   # zwei plus zwei</span></code></pre>
+<h2 id="darstellung-von-zahlen">Darstellung von Zahlen</h2>
+<p><strong>Dezimaltrennzeichen</strong></p>
+<p>In Deutschland ist es üblich, das Komma als Dezimaltrennzeichen zu verwenden. In nahezu allen Computer-Sprachen und großen Teilen der Welt (Nordamerika, Australien, in Teilen Asiens und Europas) ist dies jedoch der Punkt. Auch nutzt den Punkt als Dezimaltrenner. Kommata haben eine andere Funktion, die wir erst später kennenlernen werden. Weiterhin ist es im englischsprachigen Raum üblich, die Null vor dem Punkt wegzulassen. Dies ist auch bei möglich.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="fl">1.1</span>   <span class="co"># Der Punkt ist der Dezimaltrenner, nicht das Komma</span>
+
+[<span class="dv">1</span>] <span class="fl">1.1</span></code></pre>
+<pre class="sourceCode R"><code class="sourceCode r">.<span class="dv">1</span>    <span class="co"># Dasselbe wie 0.1</span>
+
+[<span class="dv">1</span>] <span class="fl">0.1</span></code></pre>
+<p><strong>Wissenschaftliche Notation</strong></p>
+<p>Mitunter werden sich in dem Output von folgende Ausdrücke finden lassen.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="fl">8.164e+01</span>
+<span class="fl">1.613e-04</span></code></pre>
+<p>Hierbei handelt es sich um gewöhnliche Zahlen, die in der <em>wissenschaftlichen Notation</em> (d.h. in Exponentialdarstellung) dargestellt sind. Dies ist in vielen Computerprogrammen der Fall und bedarf der Gewöhnung. Das <code>e</code> in dem Ausdruck steht für 10 hoch. Die erste Zahl ist somit <span class="math">8. 164 ⋅ 10<sup>1</sup></span>, d.h. <span class="math">81. 64</span>. Die zweite Zahl ist <span class="math">1. 613 ⋅ 10<sup> − 4</sup></span>, d.h. <span class="math">0. 0001613</span>. Besonders bei sehr kleinen Werten wird diese Notation häufig verwendet, um nicht alle Nullen ausschreiben zu müssen. Uns wird diese Art der Ausgabe später z.B. bei den Ergebnissen einer Regressionsrechnung begegnen.</p>
+<h2 id="missing-values">Missing Values</h2>
+<p>In existiert das vordefinierte Symbol <code>NA</code>, das für einen fehlenden Wert (<em>missing value</em>) steht. Die Buchstaben <code>NA</code> sind ein Akronym für die Worte <em>not available</em>. Der Ausdruck <code>NA</code> kann wie z.B. eine <span class="math">1</span> in die Konsole eingegeben und für Befehle genutzt werden.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="ot">NA</span>
+
+[<span class="dv">1</span>] <span class="ot">NA</span></code></pre>
+<p>Auch kann <code>NA</code> zum Beispiel im Rahmen einer Addition genutzt werden.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="dv">1</span> +<span class="st"> </span><span class="ot">NA</span>
+
+[<span class="dv">1</span>] <span class="ot">NA</span></code></pre>
+<p>Da nicht weiß, um welchen Wert es sich bei dem <code>NA</code> handelt ist auch das Ergebnis nicht bekannt und somit ebenfalls <code>NA</code>. Wenn z.B. der Mittelwert mit der Funktion <code>mean</code> berechnet wird und eine der eingegebenen Zahlen <code>NA</code> ist, so ist das gesamte Ergebnis, analog zur oben stehenden Addition zweier Zahlen, <code>NA</code>. Wir werden den Umgang mit <em>missing values</em> an den entsprechenden Stellen behandeln. Zunächst ist nur wichtig, dass <code>NA</code> die -interne Definition für missing values ist.</p>
+<h2 id="rechenergebnisse-speichern">Rechenergebnisse speichern</h2>
+<p>Rechnungen in durchzuführen und sich das Ergebnis anzeigen zu lassen ist hilfreich. Um das erhaltene Ergebnis jedoch für weitere Rechenschritte nutzen zu können, muss es gespeichert werden. In geschieht dies mittels des sogenannten <em>Zuweisungsoperators</em>. Dieser hat die Aufgabe, das Ergebnis eines Ausdrucks (z.B. <code>1 + 1</code>) einem <em>Objekt</em> zuzuweisen. Der Zuweisungsoperator besteht aus zwei Zeichen: einem <em>Kleiner-als-Zeichen</em> und einen <em>Minus</em> (<code>&lt;-</code>). Um eine Rechnung zu speichern, wird auf der linken Seite vom Zuweisungsoperator ein Objekt benannt, in welches das Ergebnis gespeichert werden soll (z.B <code>a</code>). Rechts von dem Zuweisungsoperator steht der Ausdruck dessen Ergebnis gespeichert werden soll (z.B. <code>1 + 1</code>).<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup></p>
+<p>Folgender Code speichert z.B. das Ergebnis der Rechnung <code>1 + 1</code> in dem Objekt <code>a</code>.</p>
+<pre class="sourceCode R"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">1</span> +<span class="st"> </span><span class="dv">1</span></code></pre>
+<p>Der Code erzeut das Objekt <code>a</code> und speichert in diesem das Ergebnis des Ausdrucks, der auf der rechten Seite vom Zuweisungsoperatoir steht (hier <code>2</code>). Um das Ergebnis, d.h. den Inhalt von <code>a</code>, anzuzeigen, muss der Name des Objektes in die Konsole eingegeben werden.</p>
+<pre class="sourceCode R"><code class="sourceCode r">a
+
+[<span class="dv">1</span>] <span class="dv">2</span></code></pre>
+<p>Wann immer Sie in den Namen eines Objektes in die Konsole eingeben und die <em>Enter</em>-Taste drücken wird sein Inhalte ausgegeben. Was genau ein Objekt ist wird im Folgenden näher erläutert.</p>
+<h4 id="objekte">Objekte</h4>
+<p>Eben haben wir das Ergebnis einer Rechnung in einem sogenannten <em>Objekt</em> gespeichert. In ist es möglich, verschiedenste Ergebnisse in Objekten zu speichern. Dies können Zahlen, Buchstabenfolgen, Koeffizienten einer Regression, Ladungen einer Faktorenanalyse oder auch ein Dutzend verschiedene Regressions-Analysen sein. Man kann sich ein Objekt am besten als einen Container oder Behälter vorstellen, der alles Mögliche enthalten kann. Die Speicherung des Ergebnisses eines Ausdrucks in einem Objekt ermöglicht es, dieses in nachfolgenden Rechnungen zu verwenden. Da in dem Objekt <code>a</code> zurzeit eine Zahl enthalten ist, kann das Objekt auch wie eine Zahl verwendet werden, d.h. man kann es addieren, multiplizieren, subtrahieren etc. Das Objekt kann somit wie eine mathematische Variable verwendet und in einen weiteren Ausdruck eingebaut werden. Denn der Name des Objekts ist nur ein symbolischer Platzhalter für den in ihm enthaltenen Wert. In unserem Fall könnte das Objekt <code>a</code>, das zurzeit den Wert <code>2</code> enthält, wie folgt genutzt werden.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="dv">3</span> *<span class="st"> </span>a
+
+[<span class="dv">1</span>] <span class="dv">6</span></code></pre>
+<p>Grundsätzlich kann der Inhalt eines Objektes verändert werden, indem eine erneute Zuweisung an das Objekt erfolgt. Nachfolgend wird dem Objekt <code>a</code> der neue Wert <span class="math">10</span> zugewiesen. Der vorherige Inhalte <span class="math">2</span> ist dann überschrieben und nicht mehr verfügbar.</p>
+<pre class="sourceCode R"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">10</span></code></pre>
+<p>Bisher haben wir nur das Objekt <code>a</code> erzeugt. Grundsätzlich kann ein neues Objekt dadurch erzeugt werden, dass es links vom Zuweisungsoperator benannt wird. Im Folgenden wird im Objekt <code>b</code> die Zahl 10 gespeichert. Danach werden die Objekte <code>a</code> und <code>b</code> (beides Zahlen) multipliziert und in dem Objekt <code>d</code> gespeichert.</p>
+<pre class="sourceCode R"><code class="sourceCode r">b &lt;-<span class="st"> </span><span class="dv">10</span>
+d &lt;-<span class="st"> </span>a *<span class="st"> </span>b
+d
+
+[<span class="dv">1</span>] <span class="dv">100</span></code></pre>
+<p>Bisher haben wir nur Zahlen in Objekten gespeichert. Nun soll in dem Objekt <code>a</code> die Zeichenkette <code>&quot;abc&quot;</code> gespeichert werden. Einzelne Zeichen und Zeichenketten werden in stets in einfache oder doppelte Anführungszeichen gesetzt (<code>'abc'</code> oder <code>&quot;abc&quot;</code>). Anders als in vielen anderen Programmiersprachen darf in jedes Objekt nacheinander verschiedenartige Typen von Werte enthalten (z.B. Zahlen, Zeichenketten etc.). Dies muss vorher nicht explizit definiert werden. Es reicht, dem Objekt einfach einen neuen Wert zuzuweisen. Wenn <code>a</code> also vorher eine Zahl enthielt, enthält es durch Zuweisung der Zeichenkette <code>&quot;abc&quot;</code> danach eine Zeichenkette.</p>
+<pre class="sourceCode R"><code class="sourceCode r">a &lt;-<span class="st"> &quot;abc&quot;</span>
+a
+
+[<span class="dv">1</span>] <span class="st">&quot;abc&quot;</span></code></pre>
+<p>Der Typ des Objekts <code>a</code> hat sich nun von Zahl auf Zeichenkette geändert. Einerseits ist diese Art der Zuweisung einfach in der Handhabung. Andererseits muss man aufpassen, welche Art von Daten (Zahl, Zeichenkette etc.) einem Objekt zugewiesen wurden. So ist z.B. die Muliplikation einer Zeichenkette mit einer Zahl nicht definiert und erzeugt einen Fehler.</p>
+<pre class="sourceCode R"><code class="sourceCode r">a *<span class="st"> </span><span class="dv">10</span>        <span class="co"># verursacht einen Fehler </span></code></pre>
+<pre class="sourceCode R"><code class="sourceCode r">
+Error in a *<span class="st"> </span><span class="dv">10</span> :<span class="st"> </span>non-numeric argument to binary operator</code></pre>
+<h4 id="benennung-von-objekten">Benennung von Objekten</h4>
+<p>Bisher haben wir Objekte mit den Namen <code>a</code>, <code>b</code> und <code>d</code> erzeugt. Grundsätzlich ist es möglich, Objekte nahezu beliebig zu benennen. Kürzel wie <code>a</code> sind jedoch oft nicht aussagekräftig und dienen nicht dem Verständnis des Codes. Sinnvoll ist es, <em>sprechende</em> Namen zu nutzen. Bei der Benennung sind lediglich einige wenige Regeln zu beachten:</p>
+<ul>
+<li><p>Objektnamen können aus Buchstaben, Zahlen, Punkten und Unterstrichen bestehen:</p>
+<p><code>object1 &lt;- 10</code></p>
+<p><code>object.1 &lt;- &quot;hallo&quot;</code></p>
+<p><code>object_1 &lt;- 10</code></p></li>
+<li><p>Objektnamen dürfen keine Operatoren enthalten (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> etc.).</p>
+<p><code>object-1 # nicht möglich</code></p></li>
+<li><p>Objektnamen dürfen nicht mit einer Zahl oder von einem Punkt gefolgt von einer Zahl beginnen.</p>
+<p><code>1object # nicht möglich</code></p>
+<p><code>.1object # nicht möglich</code></p></li>
+<li><p>Groß- und Kleinschreibung wird unterschieden. <code>a</code> und <code>A</code> ist nicht dasselbe. Dies kann systematisch genutzt werden, um Objektnamen durch gezielte Großbuchstaben leserlicher zu gestalten:</p>
+<p><code>myobject &lt;- 10</code></p>
+<p><code>myObject &lt;- 10</code></p></li>
+</ul>
+<p>Eine umfassende Übersicht über den Stil, in dem man in Objekte und Funktionen benennt und Code strukturiert, findet sich unter <a href="http://google-styleguide.googlecode.com/svn/trunk/google-r-style.html">http://google-styleguide.googlecode.com/svn/trunk/google-r-style.html</a>. Hier finden sich diverse Code-Elemente, die zu diesem Zeitpunkt noch nicht eingeführt wurden. Es lohnt sich jedoch, sich schon einmal einen Eindruck zu verschaffen.</p>
+<h2 id="logische-operationen">Logische Operationen <a name="tab:logische-abfragen"></a></h2>
+<p>Bisher haben wir die grundlegenden arithmetischen Operationen kennengelernt. In diesem Kapitel werden <em>logische Operationen</em> eingeführt. Solche Operationen sind notwendig, um etwas zu überprüfen. Zum Beispiel ob der Datensatz Personen mit einem IQ größer als 120 enthält. Logische Operationen können dazu dienen, sehr komplexe logische Fragen zu konstruieren: Gibt es Personen, die einen IQ größer als 120 haben, männlich sind sowie geschiedene Eltern haben?</p>
+<p>Um in logische Vergleiche anzustellen, stehen eine Reihe von Operatoren zur Verfügung. Ein einfacher Vergleich ist der <em>Größer-als-Vergleich</em>, z.B. ist <code>2</code> größer als <code>1</code>?</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="dv">2</span> &gt;<span class="st"> </span><span class="dv">1</span>
+
+[<span class="dv">1</span>] <span class="ot">TRUE</span></code></pre>
+<p>gibt hier den Wert <code>TRUE</code> zurück. Neben <em>größer als</em> können weitere logische Abfragen durchgeführt werden.</p>
+<p>
+<a href="#" name="tab:logische-operationen">Tabelle: Logische Operationen</a>
+</p>
+
+<table>
+<thead>
+<tr class="header">
+<th align="left">Operator</th>
+<th align="left">Beschreibung</th>
+<th align="left">Ergebnis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>1 == 2</code></td>
+<td align="left">ist <code>1</code> gleich <code>2</code>?</td>
+<td align="left"><code>FALSE</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>1 != 2</code></td>
+<td align="left">ist <code>1</code> ungleich <code>2</code>?</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>1 &gt; 2</code></td>
+<td align="left">ist <code>1</code> größer <code>2</code>?</td>
+<td align="left"><code>FALSE</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>1 &gt;= 2</code></td>
+<td align="left">ist <code>1</code> größer gleich <code>2</code>?</td>
+<td align="left"><code>FALSE</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>1 &lt; 2</code></td>
+<td align="left">ist <code>1</code> kleiner <code>2</code>?</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>1 &lt;= 2</code></td>
+<td align="left">ist <code>1</code> kleiner gleich <code>2</code>?</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+</tbody>
+</table>
+<p>Die in der <a href="#tab:logische-abfragen">Tabelle</a> beschriebenen Abfragen geben die Werte <code>TRUE</code> oder <code>FALSE</code> zurück. Dies sind die in definierten logischen Konstanten, die für <em>wahr</em> und <em>falsch</em> stehen. Wie aus der Oberstufenmathematik bekannt, kann man Wahr- und Falschaussagen mit dem logischen <em>UND</em> und <em>ODER</em> verknüpfen. So kann man fragen: Ist A <em>und</em> B wahr? Dies ist nur dann der Fall, wenn beide Werte <em>wahr</em> sind. Würde ich Sie zum Beispiel bitten, Ihre Hand zu heben, wenn Sie älter als 20 Jahre sind <em>und</em> aus dem Norden von Deutschland kommen, würden sie dies nur dann tun, wenn beide Eigenschaften auf Sie zutreffen. Es handelt sich hierbei um ein logische <em>UND</em>-Verknüpfung. Das logische <em>ODER</em> funktioniert analog: Ist A <em>oder</em> B wahr? Dies ist dann der Fall, wenn <em>mindestens einer</em> der Werte <em>wahr</em> ist. Würde ich Sie bitten, Ihre Hand zu heben, wenn sie über 20 Jahre alt sind <em>oder</em> aus dem Norden kommen, würden Sie dies tun, auch nur eine der Eigenschaften auf Sie zutrifft. In stehen für die beiden Verknüpfugstypen die logischen Operatoren <code>&amp;</code> (logisches UND) und <code>|</code> (logisches ODER) zur Verfügung. Die Verknüpfungen, die möglich sind, sind in Tabelle <a href="#tab:logische-verknüpfungen">Logische Verknüpfungen</a> dargestellt.</p>
+<p>
+<a href="#" name="tab:logische-verknüpfungen">Tabelle: Logische Verknüpfungen</a>
+</p>
+
+<table>
+<thead>
+<tr class="header">
+<th align="left">Werte</th>
+<th align="left">Beschreibung</th>
+<th align="left">Ergebnis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>TRUE | TRUE</code></td>
+<td align="left">sind beide Werte wahr?</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>TRUE | FALSE</code></td>
+<td align="left">sind beide Werte wahr?</td>
+<td align="left"><code>FALSE</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>FALSE | TRUE</code></td>
+<td align="left">sind beide Werte wahr?</td>
+<td align="left"><code>FALSE</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>FALSE | FALSE</code></td>
+<td align="left">sind beide Werte wahr?</td>
+<td align="left"><code>FALSE</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>TRUE | TRUE</code></td>
+<td align="left">ist mindestens einer der Werte wahr?</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>TRUE | FALSE</code></td>
+<td align="left">ist mindestens einer der Werte wahr?</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>FALSE | TRUE</code></td>
+<td align="left">ist mindestens einer der Werte wahr?</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>FALSE | FALSE</code></td>
+<td align="left">ist mindestens einer der Werte wahr?</td>
+<td align="left"><code>FALSE</code></td>
+</tr>
+</tbody>
+</table>
+<p>Eingangs haben wir gesagt, dass logische Operationen dabei helfen, komplexe Fragen zu konstruieren. Wie können wir mit dem bisherigen Wissen eine logische Frage konstruieren? Nehmen wir an, wir haben eine Person mit einem IQ von 120 und einem Extraversionswert von 90. Wir wollen nun z.B. wissen, ob die Person beim IQ und beim Extraversionswert über dem Mittel von 100 liegt.</p>
+<pre class="sourceCode R"><code class="sourceCode r">iq &lt;-<span class="st"> </span><span class="dv">120</span>     <span class="co"># IQ sei 100 </span>
+extra &lt;-<span class="st"> </span><span class="dv">90</span>   <span class="co"># Extraversion sei 90</span>
+iq &gt;<span class="st"> </span><span class="dv">100</span>      <span class="co"># ist der IQ größer 100?</span>
+
+[<span class="dv">1</span>] <span class="ot">TRUE</span>
+extra &gt;<span class="st"> </span><span class="dv">100</span>   <span class="co"># ist Extraversion größer 100?</span>
+
+[<span class="dv">1</span>] <span class="ot">FALSE</span></code></pre>
+<p>Diese beiden logischen Abfragen können zu einer einzigen logischen Abfrage gemäß Tabelle [tab:logische<sub>v</sub>erknuepfungen] kombiniert werden. Die Klammern sind hierbei nicht zwingend notwendig. Sie dienen in dem Beispiel nur zur Verdeutlichung.</p>
+<pre class="sourceCode R"><code class="sourceCode r">(iq &gt;<span class="st"> </span><span class="dv">100</span>) &amp;<span class="st"> </span>(extra &gt;<span class="st"> </span><span class="dv">100</span>) <span class="co"># sind der IQ und die Extraversion größer 100?</span>
+
+[<span class="dv">1</span>] <span class="ot">FALSE</span></code></pre>
+<p>Da die Person nicht bei beiden Werten über dem Durchschnitt 100 liegt wird der Wert <code>FALSE</code> zurückgegeben (denn <code>TRUE &amp; FALSE</code> ergibt <code>FALSE</code>).</p>
+<p>Neben den Konstanten <code>TRUE</code> und <code>FALSE</code> stehen in die Kurzformen <code>T</code> und <code>F</code> zur Verfügung, die alternativ verwendet werden können. Der Übersicht halber ist es jedoch ratsam, <code>TRUE</code> und <code>FALSE</code> auszuschreiben.</p>
+<pre class="sourceCode R"><code class="sourceCode r">T &amp;<span class="st"> </span>T
+
+[<span class="dv">1</span>] <span class="ot">TRUE</span></code></pre>
+<pre class="sourceCode R"><code class="sourceCode r">F |<span class="st"> </span>T
+
+[<span class="dv">1</span>] <span class="ot">TRUE</span></code></pre>
+<p>Eine weiterer wichtiger logischer Operator ist die logische Negation. Ein logischer Ausdruck (<code>TRUE</code> oder <code>FALSE</code>) kann durch das Voranstellen eines Ausrufezeichens in sein Gegenteil verwandelt werden. Die Negation von <em>TRUE</em> ist <em>FALSE</em> und umgekehrt.</p>
+<pre class="sourceCode R"><code class="sourceCode r">!<span class="st"> </span><span class="ot">TRUE</span>
+
+[<span class="dv">1</span>] <span class="ot">FALSE</span>
+!<span class="st"> </span><span class="ot">FALSE</span>
+
+[<span class="dv">1</span>] <span class="ot">TRUE</span>
+!<span class="st"> </span><span class="ot">TRUE</span> |<span class="st"> </span><span class="ot">FALSE</span>
+
+[<span class="dv">1</span>] <span class="ot">FALSE</span></code></pre>
+<p>Wir werden später sehen, dass der Operator häufig verwendet wird, um zu testen, ob eine bestimmte logische Aussage (z.B. <code>iq &gt; 100</code>) zutrifft und wenn dies nicht der Fall ist, entsprechend zu handeln.</p>
+<h2 id="sec:funktionen">Funktionen</h2>
+<h3 id="sec:argumente_reihenfolge">Argumente und ihre Reihenfolge</h3>
+<p>Bisher haben wir verschiedene Operatoren (<code>+, -, &amp;, |</code> etc.) kennengelernt, die z.B. eine Addition, Subtraktion etc. durchführen. Neben diesen grundlegenden Operatoren verfügt über einen immensen Umfang an weiteren <em>Funktionen</em>, die jeweils spezielle Aufgaben übernehmen. Das Wort <em>Funktion</em> (lat. functio) heißt übersetzt soviel wie <em>Tätigkeit</em> oder <em>Verrichtung</em>. Eine Funktion ist also ein Objekt, das eine Tätigkeit durchführt. Eine solche Tätigkeit könnten z.B. die Berechnung einer Summe, einer Varianz, einer Regression, einer Faktorenanalyse usw. sein. Nahezu alles, was in geschieht, wird mittels einer Funktion vollzogen.</p>
+<p>Funktionen sind in stets daran zu erkennen, dass sie ein bestimmtes Format haben. Es steht zuerst der Name der Funktion. Danach folgt eine öffnende runde Klammer (<code>(</code>), dann ggf. diverse weitere Ausdrücke und zum Schluss eine schließende runde Klammer (<code>)</code>). Wann immer einem in <em>runde</em> Klammern begegnen, so wird es sich um eine Funktion handeln.<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup></p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="kw">funktionsname</span>(argument<span class="fl">.1</span>, argument<span class="fl">.2</span>)</code></pre>
+<p>Innerhalb der runden Klammern kann eine Funktion sog. <em>Argumente</em> entgegennehmen. Diese geben der Funktion genaue Anweisungen darüber, wie sie ihre Verrichtung ausführen soll.</p>
+<p>Um ein besseres Verständnis von dem Begriff <em>Funktion</em> und <em>Argument</em> zu erlangen, kann man sich z.B. einen Audio-Verstärker vorstellen. Dieser erfüllt die Funktion (Verrichtung) Sound zu erzeugen. Der Verstärker erhält hierzu ein Eingangssignal (z.B. von einem MP3-Player), das er verstärkt. Darüber hinaus verfügt er i.d.R. über diverse Einstellungsknöpfe, um z.B., die Lautstärke oder die Klangfarbe einzustellen. Das Eingangssignal und die Einstellungen der Knöpfe sind übertragen auf den Begriff Funktion die <em>Argumente</em>. Argumente sind all das, was als Information in eine Funktion hineingegeben wird. Man sieht an diesem Beispiel, dass die Argumente somit zum einen den Input (Eingangssignal) enthalten als auch Möglichkeiten zur Feineinstellung (Lautstärke, Klangfarbe) bieten. Es hängt nun von den einzelnen Argumenten ab, wie genau die Verrichtung “Verstärkung” ausgeführt wird (welches Lied, laut oder leise, viel Bass oder viele Höhen). Dies ist in ebenso: Die Argumente regeln, was genau eine Funktion tut.</p>
+<p>Schauen wir uns zunächst die Funktion <code>rnorm</code> an. Der Name der Funktion <code>rnorm</code> steht für <em>random normal</em>. Die Aufgabe der Funktion ist es, zufällige, normalverteilte Werte zu erzeugen. Innerhalb der Klammer erwartet die Funktion zumindest ein Argument das angibt, wie viele zufällige Werte erzeugt werden sollen. Die folgende Zeile Code erzeugt <em>vier</em> zufällige Werte.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dv">4</span>)
+
+[<span class="dv">1</span>] -<span class="fl">0.6157</span>  <span class="fl">1.5047</span>  <span class="fl">0.1924</span>  <span class="fl">0.4279</span></code></pre>
+<p>Jedes Argument einer Funktion hat einen Namen, das mit in die Klammer eingefügt werden <em>kann</em>. Hinter dem Namen eines Arguments steht ein Gleichheitszeichen, dahinter folgt der Wert für das Argument. Wir hätten im vorherigen Beispiel den Namen des Arguments hinzufügen können. Das Argument heißt <code>n</code>.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">4</span>)
+
+[<span class="dv">1</span>]  <span class="fl">0.17722</span> -<span class="fl">0.06424</span> -<span class="fl">1.68741</span>  <span class="fl">0.96417</span></code></pre>
+<p>Wie viele und welche Argumente eine Funktion entgegennimmt ist von Funktion zu Funktion verschieden. Die Funktion <code>rnorm</code> kennt neben dem Argument <code>n</code> noch die Argumente <code>mean</code> und <code>sd</code>. Dabei bezeichnet <code>mean</code> das Zentrum und <code>sd</code> die Standardabweichung der Normalverteilung, aus der die zufälligen Werte entnommen werden. Wenn eine Funktion mehrere Argumente hat werden diese stets durch <em>Kommata</em> voneinander getrennt. Nachfolgender Befehl erzeugt vier zufällige Wert, die aus einer Normalverteilung mit dem Mittelwert <span class="math">100</span> und einer Standardabweichung von <span class="math">15</span> entstammen.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">4</span>, <span class="dt">mean=</span><span class="dv">100</span>, <span class="dt">sd=</span><span class="dv">15</span>)
+
+[<span class="dv">1</span>] <span class="fl">108.24</span>  <span class="fl">76.73</span>  <span class="fl">97.84</span>  <span class="fl">50.32</span></code></pre>
+<p>Welche Funktion welche Argumente hat und wie man dies herausfindet, wird im nächsten Kapitel ausführlich behandelt. Zunächst sollen jedoch am Beispiel von <code>rnorm</code> einige weitere grundlegende Eigeschaften von Funktionen und die Art und Weise wie man eine Funktion aufruft dargestellt werden.</p>
+<p>Im vorletzten Code-Beispiel wurde die Funktion <code>rnorm</code> aufgerufen, ohne die Argumente <code>mean</code> oder <code>sd</code> anzugeben. Trotzdem hat die Funktion Werte ausgegeben. Der Grund dafür ist, dass beim Aufruf einer Funktion nicht alle, sondern nur jene Argumente angegeben werden müssen, für die keine <em>Voreinstellung</em> vorhanden sind. Manche Funktionen brauchen sogar gar keine Argumente, so dass die runden Klammern dann komplett leer bleiben können.</p>
+<p>Im Falle von <code>rnorm</code> existieren für die Argumente <code>mean</code> und <code>sd</code> Voreinstellungen, so dass sie beim Aufruf der Funktion ausgelassen werden können. Die Argumente sind wie folgt voreingestellt: <code>mean=0</code> und <code>sd=1</code>.<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup> Wird für ein Argument im Funktionsaufruf kein Wert angegeben, so wird die Voreinstellung verwendet. Für <code>rnorm</code> bedeutet dies, dass wenn <code>mean</code> und <code>sd</code> nicht angegeben werden, die Werte <span class="math">0</span> und <span class="math">1</span> verwendet werden. In diesem Fall werden dann zufällige Werte aus einer <em>Standardnormalverteilung</em> (Mitte Null und Standardabweichung Eins) gezogen.</p>
+<p>Rekapitulieren wir kurz: Wir haben bisher gesehen, dass eine Funktion über Argumente verfügt, denen im Funktionsaufruf ein Wert übergeben werden kann. Bei der Funktion <code>rnorm</code> sind es die drei Argumente <code>n</code>, <code>mean</code> und <code>sd</code> von denen zwei Voreinstellungen besitzen und wahlweise angeben werden können.</p>
+<h4 id="reihenfolge-von-argumenten">Reihenfolge von Argumenten</h4>
+<p>In ist es möglich, die Argumente in beliebiger Reihenfolge anzugeben. Alternativ zum letzten Befehl <code>rnorm(n=4, mean=100, sd=15)</code> hätte man auch Folgendes schreiben können.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dt">sd=</span><span class="dv">15</span>, <span class="dt">n=</span><span class="dv">4</span>, <span class="dt">mean=</span><span class="dv">100</span>)
+
+[<span class="dv">1</span>] <span class="fl">134.1</span> <span class="fl">110.1</span> <span class="fl">117.4</span> <span class="fl">102.6</span></code></pre>
+<p>Die beiden Befehle sind inhaltich identisch. Beachten Sie jedoch bitte, dass die erzeugten Werte bei jedem Aufruf der Funktion verschiedenen sind, da es sich stest um zufällig erzeugte Werte handelt.</p>
+<h4 id="argumentenamen-abkürzen-oder-weglassen">Argumentenamen abkürzen oder weglassen</h4>
+<p>Bisher wurden die Argumente einer Funktion stets mit dem vollen Namen benannt (z.B. <code>mean</code>). Es ist in erlaubt, die Argumentenamen abzukürzen, indem nur der erste oder die ersten Buchstaben des Namens ausgeschrieben werden (z.B. <code>me</code> für <code>mean</code>) oder den Namen ganz wegzulassen.</p>
+<p>Betrachten wir zunächst den Fall der abgekürzten Argumentenamen. versucht abgekürzte Namen stets den vollen Namen der Argumente zuzuordnen. Würden wir z.B. nur <code>m</code> anstelle von <code>mean</code> schreiben, würde das <code>m</code> automatisch als <code>mean</code> deuten. Dies funktioniert jedoch nur dann, wenn die gewählte Abkürzung eindeutig ist und nicht zwei Argumente mit einem <code>m</code> anfangen. Sonst könnte nicht unterscheiden, welches der beiden Argument mit der Abkürzung <code>m</code> gemeint ist und würde einen Fehler erzeugen. Der nachfolgende Code ist identisch mit dem vorherigen, nur das die Namen der Argumente abgekürzt sind.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">4</span>, <span class="dt">m=</span><span class="dv">100</span>, <span class="dt">s=</span><span class="dv">15</span>)
+
+[<span class="dv">1</span>] <span class="fl">116.37</span>  <span class="fl">96.82</span>  <span class="fl">82.85</span>  <span class="fl">85.60</span></code></pre>
+<p>Neben der Nutzung von Abkürzungen ist es möglich als auch üblich, die Namen der Argumente ganz wegzulassen.<sup><a href="#fn4" class="footnoteRef" id="fnref4">4</a></sup> Denn für jede Funktion ist eine Standardreihenfolge der Argumente definiert. Bei <code>rnorm</code> ist es: <code>n</code>, <code>mean</code>, <code>sd</code>. Wenn die Namen der Argumente weggelassen werden, nimmt an, dass die Argumente genau in dieser Reihenfolge eingegeben werden. Der folgende Code entspricht somit genau dem vorherigen.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dv">4</span>, <span class="dv">100</span>, <span class="dv">15</span>)
+
+[<span class="dv">1</span>]  <span class="fl">80.04</span> <span class="fl">116.28</span>  <span class="fl">99.02</span>  <span class="fl">97.33</span></code></pre>
+<p>Es ist wichtig zu beachten, dass die Reihenfolge der Argumente nur dann variiert werden kann, wenn die Namen der Argumente benutzt werden. Wenn die Namen weggelassen werden, muss die vorgegebene Standardreihenfolge der Argumente eingehalten werden! Eine letzte Variante Argumente anzugeben ist, nur einige Argumente mit Namen anzugeben und andere in der richtigen Standardreihenfolge anzugeben. Im Folgenden wird das Argument <code>n</code> nicht namentlich benannt, da es sich um das erste in der Standardreihenfolge handelt. <code>sd</code> und <code>mean</code> sind benannt. Dies ist wichtig, da die Reihenfolge <code>sd</code>, <code>mean</code> nicht der definierten Standardreihenfolge entspricht.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dv">4</span>, <span class="dt">sd=</span><span class="dv">15</span>, <span class="dt">m=</span><span class="dv">100</span>)
+
+[<span class="dv">1</span>] <span class="fl">112.5</span> <span class="fl">117.5</span> <span class="fl">112.6</span> <span class="fl">101.5</span></code></pre>
+<h4 id="häufige-fehler">Häufige Fehler</h4>
+<p>Abschließend sei noch auf einen sehr häufig gemachten Fehler hingewiesen: die Kommata zwischen den Argumenten zu vergessen. Dies hat zur Folge, dass einen Fehler ausgibt.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">4</span> <span class="dt">mean=</span><span class="dv">100</span>, <span class="dt">sd=</span><span class="dv">15</span>)        <span class="co"># verursacht einen Fehler </span>
+
+Error:<span class="st"> </span>unexpected symbol in <span class="st">&quot;rnorm(n=4 mean&quot;</span></code></pre>
+<p>Überprüfen Sie beim Auftreten eines Fehler deshalb stets als erstes, ob die Syntax stimmt: Stehen alle Kommata am richtigen Ort? Wurde jede geöffnete Klammer auch wieder geschlossen? 90 % der gemachten Fehler sind Syntaxfehler.</p>
+<h3 id="zurückgegebene-objekte-einer-funktion">Zurückgegebene Objekte einer Funktion</h3>
+<p>In gibt jede Funktion <em>immer</em> ein Objekt (z.B. eine Zahl, eine Zeichenkette, einen logischen Wert etc.) zurück. Hiervon gibt es in <em>keine</em> Ausnahme. Im letzten Beispiel hat die Funktion <code>rnorm</code> zufällige Werte zurückgegeben. Zwar mag es sein, dass eine Funktion ein Objekt nicht <em>sichtbar</em> zurückgibt, wie z.B. die Funktion <code>hist</code>, die ein Histogramm erzeugt. Dennoch gibt auch <code>hist</code> ein Objekt zurück, das dann sichtbar wird, wenn man es in ein Objekt speichert und dieses in der Konsole ausgeben lässt.</p>
+<pre class="sourceCode R"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>) 
+<span class="kw">hist</span>(a) 
+h &lt;-<span class="st"> </span><span class="kw">hist</span>(a)
+h</code></pre>
+<pre class="sourceCode R"><code class="sourceCode r">
+$breaks
+ [<span class="dv">1</span>] -<span class="fl">3.0</span> -<span class="fl">2.5</span> -<span class="fl">2.0</span> -<span class="fl">1.5</span> -<span class="fl">1.0</span> -<span class="fl">0.5</span>  <span class="fl">0.0</span>  <span class="fl">0.5</span>  <span class="fl">1.0</span>  <span class="fl">1.5</span>  <span class="fl">2.0</span>  <span class="fl">2.5</span>  <span class="fl">3.0</span>
+
+$counts
+ [<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">4</span>  <span class="dv">6</span> <span class="dv">10</span>  <span class="dv">9</span> <span class="dv">20</span> <span class="dv">25</span> <span class="dv">13</span>  <span class="dv">6</span>  <span class="dv">4</span>  <span class="dv">1</span>  <span class="dv">1</span></code></pre>
+<p>Es ist an dieser Stelle nicht möglich und auch nicht von Bedeutung, diesen Output zu verstehen. Es ist nur wichtig im Hinterkopf zu behalten, dass jede Funktionen stets <em>etwas</em> zurückgibt.</p>
+<p>Es kann weiterhin der Fall sein, dass eine Funktion ein sogenanntes <code>NULL</code> Objekt zurückgibt. Dies bedeutet, dass die Funktion eigentlich nichts zurückgibt. Dass sie im Grunde nichts zurückgibt, zeigt sie an, indem Sie ein Objekt ohne Inhalt, ein sog. <code>NULL</code>-Objekt zurückgibt. Trotzdem gibt ein Funktion <em>immer</em> etwas, und sei es ein <code>NULL</code>-Objekt, zurück.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">1</span>:<span class="dv">10</span>)
+p &lt;-<span class="st"> </span><span class="kw">plot</span>(<span class="dv">1</span>:<span class="dv">10</span>) 
+p</code></pre>
+<pre class="sourceCode R"><code class="sourceCode r">
+<span class="ot">NULL</span></code></pre>
+<h2 id="sec:datensaetze_in_r">Datensätze in</h2>
+<p>In sind bereits mit der Installation diverse Beispieldatensätze verfügbar. Weitere Datensätze sind in vielen der zusätzlich installierten Pakete enthalten. Die mitgelieferten Datensätze können gut zum Ausprobieren genutzt werden. So müssen nicht erst extra Daten einlesen werden, um Funktionen auszuprobieren.</p>
+<p>Die Funktion <code>data</code> listet alle Datensätze aus den Paketen auf, die zurzeit geladen sind (Abbildung [fig:r<sub>d</sub>atasets]). Datensätze aus Paketen, die nicht geladen sind, werden nicht mit aufgeführt.<sup><a href="#fn5" class="footnoteRef" id="fnref5">5</a></sup></p>
+<div class="figure">
+<img src="img/r_datasets_bw.png" alt="Datensätze in R" /><p class="caption">Datensätze in R</p>
+</div>
+<p style="text-align: center;">
+<a href="#" name="fig:datasets">Abbildung: Datensätze in R</a>
+</p>
+
+<p>Um einen Datensatz aus einem Paket zu nutzen, muss das Paket vorher geladen werden. Danach sind zwei Varianten möglich. Manche Pakete holen ihre Datensätze beim Laden des Pakets automatisch in den Speicher. So zum Beispiel das Paket <code>ggplot2</code>. Nach dem Laden von <code>ggplot2</code> ist der in dem Paket enthaltene Datensatz <code>economics</code> direkt verfügbar, indem der Name des Datensatzes <code>economics</code> in die Konsole eingegeben wird.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+economics</code></pre>
+<pre class="sourceCode R"><code class="sourceCode r">
+        date   pce    pop psavert uempmed unemploy
+<span class="dv">1</span> <span class="dv">1967-06-30</span> <span class="fl">507.8</span> <span class="dv">198712</span>     <span class="fl">9.8</span>     <span class="fl">4.5</span>     <span class="dv">2944</span>
+<span class="dv">2</span> <span class="dv">1967-07-31</span> <span class="fl">510.9</span> <span class="dv">198911</span>     <span class="fl">9.8</span>     <span class="fl">4.7</span>     <span class="dv">2945</span>
+<span class="dv">3</span> <span class="dv">1967-08-31</span> <span class="fl">516.7</span> <span class="dv">199113</span>     <span class="fl">9.0</span>     <span class="fl">4.6</span>     <span class="dv">2958</span></code></pre>
+<p>Bei anderen Paketen müssen die Datensätze zusätzlich in den Speicher geladen werden müssen, bevor sie verfügbar sind. So z.B. bei den Datensätzen aus dem Paket <code>AER</code>. Dies geschieht ebenfalls mittels der Funktion <code>data</code>. Der Name des zu ladenden Datensatzes wird als Argument angegeben, hier der Datensatz <code>Affairs</code>. Der Datensatz ist erst nach dem Laden verfügbar.</p>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="kw">library</span>(AER) 
+Affairs</code></pre>
+<pre class="sourceCode R"><code class="sourceCode r">
+Error in <span class="kw">try</span>(Affairs) :<span class="st"> </span>object <span class="st">&#39;Affairs&#39;</span> not found</code></pre>
+<pre class="sourceCode R"><code class="sourceCode r"><span class="kw">data</span>(Affairs) 
+Affairs</code></pre>
+<pre class="sourceCode R"><code class="sourceCode r">
+   affairs gender age yearsmarried children religiousness education
+<span class="dv">4</span>        <span class="dv">0</span>   male  <span class="dv">37</span>           <span class="dv">10</span>       no             <span class="dv">3</span>        <span class="dv">18</span>
+<span class="dv">5</span>        <span class="dv">0</span> female  <span class="dv">27</span>            <span class="dv">4</span>       no             <span class="dv">4</span>        <span class="dv">14</span>
+<span class="dv">11</span>       <span class="dv">0</span> female  <span class="dv">32</span>           <span class="dv">15</span>      yes             <span class="dv">1</span>        <span class="dv">12</span>
+   occupation rating
+<span class="dv">4</span>           <span class="dv">7</span>      <span class="dv">4</span>
+<span class="dv">5</span>           <span class="dv">6</span>      <span class="dv">4</span>
+<span class="dv">11</span>          <span class="dv">1</span>      <span class="dv">4</span></code></pre>
+<p>In der Standardinstallation von , die das Paket <code>datsets</code> enthält, sind bereits ca. <span class="math">100</span> Datensätze enthalten (siehe <code>data()</code>). Diese müssen nicht noch extra geladen werden, bevor sie genutzt werden können. Alle Datensätze in verfügen über eine Dokumentation, die beschreibt, welche Bedeutung die Variablen haben. Wie auf diese zugegriffen wird ist im folgenden Kapitel beschrieben.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Es ist auch möglich, den Zuweisungsoperator mit dem Pfeil nach rechts zu verwenden. Dann steht links der Befehl und rechts der Name des Objekts (z.B. <code>1 + 1 -&gt; a</code>). Dies ist jedoch nicht üblich und sollte aus Gründen der Lesbarkeit nicht gemacht werden. Alternativ kann für eine Zuweisung auch das Gleichheitszeichen genutzt werden (<code>a = 1 + 1</code>). In ist es jedoch üblich, ausschließlich den <code>&lt;-</code> Operator zu benutzen. Auch hier werde ich dieser Konvention folgen, da das Gleichheitszeichen für einen anderen Verwendungszusammenhang vorbehalten bleiben soll, der in Kapitel [sec:funktionen] eingeführt wird.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Es sei angemerkt, dass nicht alle Funktionsaufrufe über runde Klammern erfolgen. Auch das Plus-Zeichen ist eine Funktion. Zum jetzigen Zeitpunkt ist es jedoch ausreichend, alle Befehle, die eine runde Klammern nutzen, als Funktionen zu identifizieren.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>Wie man diese herausfindet wird im folgenden Kapitel behandelt. Sie können jedoch dem Vorgreifen und den Befehl <code>args(rnorm)</code> schon einmal in die Konsole eingeben und den Output inspizieren.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>Wir haben dies im ersten Beispiel mit dem Befehl <code>rnorm(4)</code> bereits getan.<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>Um sich alle Datensätze, die verfügbar sind, d.h. auch jene aus Paketen, die nicht geladen sind, anzeigen zu lassen, kann ebenfalls die Funktion <code>data</code> genutzt werden. hierzu dient folgender Befehl: <code>data(package = .packages(all.available = TRUE))</code>. Dieser Befehl ist recht kompliziert und zu diesen Zeitpunkt noch nicht komplett nachvollziehbar. Er ist jedoch manchmal nützlich.<a href="#fnref5">↩</a></p></li>
+</ol>
+</div>
+
+          
+            <div id="prev-next-container" style="margin-top:20px;">
+  <p><a class="btn-previous" href="#">&#8592; Vorheriges Kapitel</a></p>
+  <p><a class="btn-next" href="#">Nächstes Kapitel &#8594;</a></p>
+</div>
+<div style="clear: both;"> </div>
+         
+        </div>
+      </div>
+
+      <style>
+        .btn-previous {
+          float: left;
+        }
+        .btn-next {
+          float: right;
+        }
+      </style>
+
+      <div class="container" style="margin-top: 20px;">
+<div id="content" class="col-sm-8 pull-right">     
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'ryoureadytest'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</div>
+      
+      <div class="footer">
+  <hr>
+  <p>&copy; Mark Heckmann. Powered by 
+    <a href="http://jekyllrb.com/">jekyll</a>,
+    <a href="http://yihui.name/knitr/">knitr</a>,  
+    <a href="http://johnmacfarlane.net/pandoc/">pandoc</a>,
+    <a href="http://bootswatch.com/united/">bootswatch</a>,
+    and <a href="https://github.com/hadley/adv-r/">Hadley's book code</a>.
+    Source available on <a href="https://github.com/hadley/adv-r/">github</a>.
+  </p>
+</div>
+    
+    </div> <!-- /container -->
+
+  <script src="//code.jquery.com/jquery.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script> 
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/toc.js"></script>
+ 
+       <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+    ga('create', 'UA-67989-16', 'had.co.nz');
+    ga('send', 'pageview');
+  </script>
+ 
+  </body>
+  
+  
+</html>

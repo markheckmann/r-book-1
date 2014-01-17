@@ -1,0 +1,781 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Grundlagen der Sprache}  \label{sec:grundlagen_sprache}
+
+\begin{lernzielbox} 
+ \item Die ersten Befehle in \R{} eingeben 
+ \item Einen Eindruck vom Umgang mit \R{} bekommen
+\end{lernzielbox}  
+
+Dieses Kapitel führt in die grundlegende Funktionsweise der Sprache \R{} ein. Wie bei jeder Sprache tauchen dabei Begriffe auf, die unbekannt oder ungewohnt sind bzw. in der jeweiligen Sprache eine besondere Bedeutung haben. Lassen Sie sich von Begriffen wie \emph{Objekt}, \emph{Funktion} oder \emph{Operator} nicht abschrecken. Am Ende des Buches werden diese zu ihrem \R{}-Standard-Wortschatz zählen und ihre Bedeutung innerhalb von \R{} wird verständlich sein.
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R als Taschenrechner}
+
+\R{} funktioniert interaktiv in einem \emph{Frage-Anwort Modus}. Wenn man z.\,B. etwas in die Konsole eingibt und die Eingabetaste drückt, wird das Eingegebene ausgewertet. Auf diese Weise kann \R{} wie ein Taschenrechner genutzt werden:
+
+\begin{Schunk}
+\begin{Sinput}
+> 1 + 1
+\end{Sinput}
+\begin{Soutput}
+[1] 2
+\end{Soutput}
+\begin{Sinput}
+> 10 - 5
+\end{Sinput}
+\begin{Soutput}
+[1] 5
+\end{Soutput}
+\end{Schunk}
+
+Wie im vorangehenden Beispiel deutlich wird, können die grundlegenden arithmetischen Operationen (d.h.\texttt{ + - * /})genutzt werden. Klammern können in der üblichen Weise verwendet werden und markieren den Vorrang einer Operation vor einer anderen Operation.
+
+\begin{Schunk}
+\begin{Sinput}
+> 3 * (1 + 1) 
+\end{Sinput}
+\begin{Soutput}
+[1] 6
+\end{Soutput}
+\begin{Sinput}
+> (2 + 2)/(1 + 1)
+\end{Sinput}
+\begin{Soutput}
+[1] 2
+\end{Soutput}
+\end{Schunk}
+
+Pro Zeile können ein oder mehrere Befehle in die \R{} Konsole eingegeben werden. Wenn mehrere Befehle in einer Zeile stehen, muss das Ende jedes einzelnen Befehls durch ein Semikolon (\texttt{;}) gekennzeichnet werden. Ein Semikolon markiert in \R{} jeweils das Ende eines Befehls. Für den letzten Befehl in einer Zeile kann das Semikolon weggelassen werden. Da es üblich ist, nur einen Befehl pro Zeile zu schreiben, findet man selten Semikolons im \R{} Code.
+
+\begin{Schunk}
+\begin{Sinput}
+> 1 + 1; 2 + 2; 3 + 3
+\end{Sinput}
+\begin{Soutput}
+[1] 2
+\end{Soutput}
+\begin{Soutput}
+[1] 4
+\end{Soutput}
+\begin{Soutput}
+[1] 6
+\end{Soutput}
+\end{Schunk}
+
+Befehle können sich auch über mehrere Zeilen erstrecken. \R{} überprüft jeweils die eingegeben Befehle. Wenn ein Befehl am Ende einer Zeile oder bei einem eingefügten Zeilenumbruch noch nicht abgeschlossen ist, wird \R{} das Ende eines Befehls in den nachfolgenden Zeilen suchen. Der Befehl wird erst dann ausgeführt, wenn er vollständig ist. Im nachfolgenden Beispiel erwartet \R{} noch eine weitere Ziffer, da die Zeile mit einem Minus-Zeichen endet und der Befehl somit noch nicht vollständig ist. Dass ein Befehl noch nicht abgeschlossen ist zeigt \R{} dadurch an, dass es anstatt dem üblichen Größer-Als-Zeichen (\texttt{>}) ein Pluszeichen am Zeilenanfang ausgibt. Lassen Sie sich durch das Pluszeichen nicht verwirren, es dient nur als Hinweis, dass noch ein Teil des Befehls fehlt.
+
+\begin{Schunk}
+\begin{Sinput}
+> 1 - 2 - 3 - 
++4 - 5
+\end{Sinput}
+\begin{Soutput}
+[1] -13
+\end{Soutput}
+\end{Schunk}
+
+Manchmal kommt es vor, dass man Fehler in den Code einbaut, die dazu führen, dass \R{} immer weiter auf den Abschluss des Befehls wartet. In diesem Fall kann die Eingabe durch das Drücken der \emph{Escape}-Taste abgebrochen werden. \\
+
+\textbf{Grundlegende Arithmetische Operationen}
+
+Wie bereits dargestellt wurde, können in \R{} die grundlegenden arithmetischen Operationen, wie sie aus dem Taschenrechner bekannt sind, genutzt werden. Hierbei gilt die übliche Auswertungsreihenfolge von Operatoren (Punkt- vor Strichrechnung). Eine Liste der grundlegenden arithmetischen Operationen findet sich in Tabelle \ref{tab:arithmetik}. 
+
+% arithmetische Operatoren
+\begin{table}[h]
+  \centering
+  \caption{Arithmetische Funktionen.}
+  \label{tab:arithmetik}
+\begin{footnotesize}
+\begin{tabular}{ll}
+\hline
+Operator & Beschreibung             \tabularnewline
+\hline
+\verb!4 + 4!	& Addition            \tabularnewline
+\verb!4 - 1!	& Subtraktion         \tabularnewline
+\verb!4 * 4!	& Multiplikation      \tabularnewline
+\verb!4 / 4!	& Division            \tabularnewline
+\verb!2 ^ 2!	& Potenzierung        \tabularnewline
+\verb!5 %% 2!	& Ganzzahl-Division (5/2 = 2 mit Rest 1)  \tabularnewline
+\verb!5 %/% 2!	& Modulo-Division (Rest der Ganzzahl-Division)  \tabularnewline
+\hline
+\end{tabular}
+\end{footnotesize}
+\end{table}
+
+Geben Sie folgende Beispiele ein und schauen Sie, was passiert.
+
+\begin{Schunk}
+\begin{Sinput}
+> 5^2
+> 5 %% 2 
+> 5 / 5
+\end{Sinput}
+\end{Schunk}
+                                                  
+% \textbf{Navigation}. Die Befehle, die \R{} ausgewertet werden als Historie gespeichert. Man kann innerhalb der Befehlshistorie durch die Aufwärts- und Abweitspfeile navigieren. Durch drücken des Aufwärtspfeiles wird der zuletzt ausgeführte Befehl aufgerufen. Da man denselben oder einen leicht modofizierten Befehl häufig öfters ausführen möchte, spart man sich hierdurch ein wenig Schreibarbeit.
+%  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Kommentare im Code}
+
+%\textbf{Kommentare}. 
+Die Raute (\verb!#!) hat in \R{} eine besondere Bedeutung. Sie leitet sogenannte \emph{Kommentare} ein. Alles was in einer Zeile hinter der Raute steht, wird von \R{} nicht ausgewertet und dient dazu, den Code zu kommentieren. Kommentare sind sehr wichtig, um die eigenen Analysen auch nach Monaten noch nachvollziehen zu können oder dies anderen zu ermöglichen. An Kommentaren sollten Sie nicht sparen! Guter Code enthält stets ausreichend Kommentare, um Dritten den Code verständlich zu machen.
+
+\begin{Schunk}
+\begin{Sinput}
+> 1 + 1   # Hier gehört die Erklärung der Analyse hin
+\end{Sinput}
+\begin{Soutput}
+[1] 2
+\end{Soutput}
+\end{Schunk}
+ 
+Schauen Sie sich noch einmal den Code aus dem \emph{Beispiel zum Schnelleinstieg} von Seite \pageref{fig:r_beispiel_2} an. Dort sehen Sie, wie in jeder Zeile Kommentare stehen, die beschreiben, was gerechnet wird. 
+
+Außer dafür, Erklärungen in den Code zu schreiben, wird das Kommentarzeichen häufig genutzt, Code \emph{auszukommentieren}. Denn eine Raute führt dazu, dass alles hinter der Raute als Kommentar interpretiert und nicht ausgeführt wird. Somit bewirkt eine Raute \emph{vorm} \R{}-Code, dass dieser nicht ausgeführt wird. Dies kann nützlich sein, wenn Teile einer Analyse zeitweise nicht mehr ausgeführt werden sollen. Nachfolgend wird \texttt{1 + 1} gerechnet, \texttt{2 + 2} jedoch nicht, da es als Kommentar gekennzeichnet ist.
+
+\begin{Schunk}
+\begin{Sinput}
+> 1 + 1       # eins plus eins
+\end{Sinput}
+\begin{Soutput}
+[1] 2
+\end{Soutput}
+\begin{Sinput}
+> # 2 + 2     # zwei plus zwei
+\end{Sinput}
+\end{Schunk}
+   
+
+\section{Darstellung von Zahlen}  
+
+\textbf{Dezimaltrennzeichen} 
+
+In Deutschland ist es üblich, das Komma als Dezimaltrennzeichen zu verwenden. In nahezu allen Computer-Sprachen und großen Teilen der Welt (Nordamerika, Australien, in Teilen Asiens und Europas) ist dies jedoch der Punkt. Auch \R{} nutzt den Punkt als Dezimaltrenner. Kommata haben eine andere Funktion, die wir erst später kennenlernen werden. Weiterhin ist es im englischsprachigen Raum üblich, die Null vor dem Punkt wegzulassen. Dies ist auch bei \R{} möglich.
+
+\begin{Schunk}
+\begin{Sinput}
+> 1.1     # Der Punkt ist der Dezimaltrenner, nicht das Komma
+\end{Sinput}
+\begin{Soutput}
+[1] 1.1
+\end{Soutput}
+\begin{Sinput}
+> .1      # Dasselbe wie 0.1
+\end{Sinput}
+\begin{Soutput}
+[1] 0.1
+\end{Soutput}
+\end{Schunk}
+
+
+\par
+\textbf{Wissenschaftliche Notation} 
+
+Mitunter werden sich in dem Output von \R{} folgende Ausdrücke finden lassen. 
+
+\begin{Schunk}
+\begin{Sinput}
+> 8.164e+01              
+> 1.613e-04
+\end{Sinput}
+\end{Schunk}
+
+Hierbei handelt es sich um gewöhnliche Zahlen, die in der \emph{wissenschaftlichen Notation} (d.\,h. in Exponentialdarstellung) dargestellt sind. Dies ist in vielen Computerprogrammen der Fall und bedarf der Gewöhnung. Das \verb!e! in dem Ausdruck steht für 10 hoch. Die erste Zahl ist somit $8.164 \cdot 10^1$, d.h. $81.64$. Die zweite Zahl ist $1.613 \cdot 10^{-4}$, d.h. $0.0001613$. Besonders bei sehr kleinen Werten wird diese Notation häufig verwendet, um nicht alle Nullen ausschreiben zu müssen. Uns wird diese Art der Ausgabe später z.\,B. bei den Ergebnissen einer Regressionsrechnung begegnen. 
+                                                                                   
+
+
+\section{Missing Values}      
+
+In \R{} existiert das vordefinierte Symbol \verb!NA!, das für einen fehlenden Wert (\emph{missing value}) steht. Die Buchstaben \verb!NA! sind ein Akronym für die Worte \emph{not available}. Der Ausdruck \texttt{NA} kann wie z.\,B. eine $1$ in die Konsole eingegeben und für \R{} Befehle genutzt werden. 
+
+\begin{Schunk}
+\begin{Sinput}
+> NA
+\end{Sinput}
+\begin{Soutput}
+[1] NA
+\end{Soutput}
+\end{Schunk}
+
+Auch kann \texttt{NA} zum Beispiel im Rahmen einer Addition genutzt werden.
+
+\begin{Schunk}
+\begin{Sinput}
+> 1 + NA
+\end{Sinput}
+\begin{Soutput}
+[1] NA
+\end{Soutput}
+\end{Schunk}
+
+Da \R{} nicht weiß, um welchen Wert es sich bei dem \texttt{NA} handelt ist auch das Ergebnis nicht bekannt und somit ebenfalls \texttt{NA}. Wenn z.\,B. der Mittelwert mit der Funktion \texttt{mean} berechnet wird und eine der eingegebenen Zahlen \texttt{NA} ist, so ist das gesamte Ergebnis, analog zur oben stehenden Addition zweier Zahlen, \texttt{NA}. Wir werden den Umgang mit \emph{missing values} an den entsprechenden Stellen behandeln. Zunächst ist nur wichtig, dass \texttt{NA} die \R{}-interne Definition für missing values ist.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Rechenergebnisse speichern}
+
+Rechnungen in \R{} durchzuführen und sich das Ergebnis anzeigen zu lassen ist hilfreich. Um das erhaltene Ergebnis jedoch für weitere Rechenschritte nutzen zu können, muss es gespeichert werden. In \R{} geschieht dies mittels des sogenannten \emph{Zuweisungsoperators}. Dieser hat die Aufgabe, das Ergebnis eines Ausdrucks (z.\,B.  \verb!1 + 1!) einem \emph{Objekt} zuzuweisen. Der Zuweisungsoperator besteht aus zwei Zeichen: einem \emph{Kleiner-als-Zeichen} und einen \emph{Minus} (\verb!<-!). Um eine Rechnung zu speichern, wird auf der linken Seite vom Zuweisungsoperator ein Objekt benannt, in welches das Ergebnis gespeichert werden soll (z.\,B \texttt{a}). Rechts von dem Zuweisungsoperator steht der Ausdruck dessen Ergebnis gespeichert werden soll (z.\,B. \verb!1 + 1!).\footnote{Es ist auch möglich, den Zuweisungsoperator mit dem Pfeil nach rechts zu verwenden. Dann steht links der Befehl und rechts der Name des Objekts (z.\,B. \texttt{1 + 1 -> a}). Dies ist jedoch nicht üblich und sollte aus Gründen der Lesbarkeit nicht gemacht werden.
+Alternativ kann für eine Zuweisung auch das Gleichheitszeichen genutzt werden (\texttt{a = 1 + 1}). In \R{} ist es jedoch üblich, ausschließlich den \texttt{<-} Operator zu benutzen. Auch hier werde ich dieser Konvention folgen, da das Gleichheitszeichen für einen anderen Verwendungszusammenhang vorbehalten bleiben soll, der in Kapitel \ref{sec:funktionen} eingeführt wird.}        
+
+Folgender Code speichert z.\,B. das Ergebnis der Rechnung \verb!1 + 1! in dem Objekt \verb!a!. 
+
+\begin{Schunk}
+\begin{Sinput}
+> a <- 1 + 1 
+\end{Sinput}
+\end{Schunk}
+
+Der Code erzeut das Objekt \texttt{a} und speichert in diesem das Ergebnis des Ausdrucks, der auf der rechten Seite vom Zuweisungsoperatoir steht (hier \verb!2!). Um das Ergebnis, d.\,h. den Inhalt von \texttt{a}, anzuzeigen, muss der Name des Objektes in die Konsole eingegeben werden.
+
+\begin{Schunk}
+\begin{Sinput}
+> a
+\end{Sinput}
+\begin{Soutput}
+[1] 2
+\end{Soutput}
+\end{Schunk}
+
+Wann immer Sie in \R{} den Namen eines Objektes in die Konsole eingeben und die \emph{Enter}-Taste drücken wird sein Inhalte ausgegeben. Was genau ein Objekt ist wird im Folgenden näher erläutert.
+
+
+\vspace{5mm}
+\textbf{Objekte}
+
+Eben haben wir das Ergebnis einer Rechnung in einem sogenannten \emph{Objekt} gespeichert. In \R{} ist es möglich, verschiedenste Ergebnisse in Objekten zu speichern. Dies können Zahlen, Buchstabenfolgen, Koeffizienten einer Regression, Ladungen einer Faktorenanalyse oder auch ein Dutzend verschiedene Regressions-Analysen sein. Man kann sich ein Objekt am besten als einen Container oder Behälter vorstellen, der alles Mögliche enthalten kann. Die Speicherung des Ergebnisses eines \R{} Ausdrucks in einem Objekt ermöglicht es, dieses in nachfolgenden Rechnungen zu verwenden. Da in dem Objekt \verb!a! zurzeit eine Zahl enthalten ist, kann das Objekt auch wie eine Zahl verwendet werden, d.h. man kann es addieren, multiplizieren, subtrahieren etc. Das Objekt kann somit wie eine mathematische Variable verwendet und in einen weiteren \R{} Ausdruck eingebaut werden. Denn der Name des Objekts ist nur ein symbolischer Platzhalter für den in ihm enthaltenen Wert. In unserem Fall könnte das Objekt \texttt{a}, das zurzeit den Wert \texttt{2} enthält, wie folgt genutzt werden.
+
+\begin{Schunk}
+\begin{Sinput}
+> 3 * a
+\end{Sinput}
+\begin{Soutput}
+[1] 6
+\end{Soutput}
+\end{Schunk}
+
+Grundsätzlich kann der Inhalt eines Objektes verändert werden, indem eine erneute Zuweisung an das Objekt erfolgt. Nachfolgend wird dem Objekt \verb!a! der neue Wert $10$ zugewiesen. Der vorherige Inhalte $2$ ist dann überschrieben und nicht mehr verfügbar. 
+
+\begin{Schunk}
+\begin{Sinput}
+> a <- 10
+> a
+\end{Sinput}
+\begin{Soutput}
+[1] 10
+\end{Soutput}
+\end{Schunk}
+
+Bisher haben wir nur das Objekt \verb!a! erzeugt. Grundsätzlich kann ein neues Objekt dadurch erzeugt werden, dass es links vom Zuweisungsoperator benannt wird. Im Folgenden wird im Objekt \verb!b! die Zahl 10 gespeichert. Danach werden die Objekte \verb!a! und \verb!b! (beides Zahlen) multipliziert und in dem Objekt \verb!d! gespeichert.
+
+\begin{Schunk}
+\begin{Sinput}
+> b <- 10
+> d <- a * b
+> d
+\end{Sinput}
+\begin{Soutput}
+[1] 100
+\end{Soutput}
+\end{Schunk}
+
+Bisher haben wir nur Zahlen in Objekten gespeichert. Nun soll in dem Objekt \verb!a! die Zeichenkette \verb!"abc"! gespeichert werden. Einzelne Zeichen und Zeichenketten werden in \R{} stets in einfache oder doppelte Anführungszeichen gesetzt (\verb!'abc'! oder \verb!"abc"!). Anders als in vielen anderen Programmiersprachen darf in \R{} jedes Objekt nacheinander verschiedenartige Typen von Werte enthalten (z.\,B. Zahlen, Zeichenketten etc.). Dies muss vorher nicht explizit definiert werden. Es reicht, dem Objekt einfach einen neuen Wert zuzuweisen. Wenn \verb!a! also vorher eine Zahl enthielt, enthält es durch Zuweisung der Zeichenkette \verb!"abc"! danach eine Zeichenkette. 
+
+\begin{Schunk}
+\begin{Sinput}
+> a <- "abc"  
+> a
+\end{Sinput}
+\begin{Soutput}
+[1] "abc"
+\end{Soutput}
+\end{Schunk}
+
+Der Typ des Objekts \verb!a! hat sich nun von Zahl auf Zeichenkette geändert. Einerseits ist diese Art der Zuweisung einfach in der Handhabung. Andererseits muss man aufpassen, welche Art von Daten  (Zahl, Zeichenkette etc.) einem Objekt zugewiesen wurden. So ist z.\,B. die Muliplikation einer Zeichenkette mit einer Zahl nicht definiert und erzeugt einen Fehler.
+
+\begin{Schunk}
+\begin{Sinput}
+> a * 10        # verursacht einen Fehler
+\end{Sinput}
+\end{Schunk}
+\vspace{-8mm}
+
+\begin{Schunk}
+\begin{Soutput}
+Error in a * 10 : nicht-numerisches Argument für binären Operator
+\end{Soutput}
+\end{Schunk}
+
+             
+\vspace*{5mm}
+\textbf{Benennung von Objekten}
+
+Bisher haben wir Objekte mit den Namen \verb!a!, \verb!b! und \verb!d! erzeugt. Grundsätzlich ist es möglich, Objekte nahezu beliebig zu benennen. Kürzel wie \verb!a! sind jedoch oft nicht aussagekräftig und dienen nicht dem Verständnis des Codes. Sinnvoll ist es, \emph{sprechende} Namen zu nutzen. Bei der Benennung sind lediglich einige wenige Regeln zu beachten: 
+
+\begin{itemize}
+  \item Objektnamen können aus Buchstaben, Zahlen, Punkten und Unterstrichen bestehen:
+\begin{Schunk}
+\begin{Sinput}
+>   object1 <- 10    
+>   object.1 <- "hallo" 
+>   object_1 <- 10
+\end{Sinput}
+\end{Schunk}
+  \item Objektnamen dürfen keine Operatoren enthalten (\verb!+!, \verb!-!, \verb!*!, \verb!/! etc.).  
+  \begin{Schunk} 
+    \begin{Sinput}
+> object-1    # nicht möglich
+    \end{Sinput} 
+  \end{Schunk}  
+  \item Objektnamen dürfen nicht mit einer Zahl oder von einem Punkt gefolgt von einer Zahl beginnen. 
+  \begin{Schunk} 
+    \begin{Sinput}
+> 1object     # nicht möglich
+> .1object    # nicht möglich
+    \end{Sinput} 
+  \end{Schunk}
+  \item Groß- und Kleinschreibung wird unterschieden. \verb!a! und \verb!A! ist nicht dasselbe. Dies kann systematisch genutzt werden, um Objektnamen durch gezielte Großbuchstaben leserlicher zu gestalten:
+\begin{Schunk}
+\begin{Sinput}
+> myobject <- 10
+> myObject <- 10
+\end{Sinput}
+\end{Schunk}
+\end{itemize}
+
+Eine umfassende Übersicht über den Stil, in dem man in \R{} Objekte und Funktionen benennt und Code strukturiert, findet sich unter \url{http://google-styleguide.googlecode.com/svn/trunk/google-r- style.html}. Hier finden sich diverse Code-Elemente, die zu diesem Zeitpunkt noch nicht eingeführt wurden. Es lohnt sich jedoch, sich schon einmal einen Eindruck zu verschaffen.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Logische Operationen} \label{sec:logische_operationen}                            
+
+Bisher haben wir die grundlegenden arithmetischen Operationen kennengelernt. In diesem Kapitel werden \emph{logische Operationen} eingeführt. Solche Operationen sind notwendig, um etwas zu überprüfen. Zum Beispiel ob der Datensatz Personen mit einem IQ größer als 120 enthält. Logische Operationen können dazu dienen, sehr komplexe logische Fragen zu konstruieren: Gibt es Personen, die einen IQ größer als 120 haben, männlich sind sowie geschiedene Eltern haben? 
+               
+Um in \R{} logische Vergleiche anzustellen, stehen eine Reihe von Operatoren zur Verfügung. Ein einfacher Vergleich ist der \emph{Größer-als-Vergleich}, z.\,B. ist \verb!2! größer als \verb!1!?
+
+\begin{Schunk}
+\begin{Sinput}
+> 2 > 1
+\end{Sinput}
+\begin{Soutput}
+[1] TRUE
+\end{Soutput}
+\end{Schunk}
+ 
+\R{} gibt hier den Wert \verb!TRUE! zurück. Neben \emph{größer als} können weitere logische Abfragen durchgeführt werden.
+
+% logische Abfragen
+\begin{table}[h]
+  \centering
+  \caption{Logische Abfragen.}
+  \label{tab:logische_abfragen}
+\begin{small}
+\begin{tabular}{lll}
+\hline
+Operator & Beschreibung  & Ergebnis    \tabularnewline
+\hline
+\verb!1 == 2!	& ist \verb!1! gleich \verb!2!?   & \verb!FALSE!     \tabularnewline
+\texttt{1 != 2}	& ist \verb!1! ungleich \verb!2!? & \verb!TRUE!         \tabularnewline
+\verb!1 > 2!	&  ist \verb!1! größer \verb!2!?  & \verb!FALSE!  \tabularnewline
+\verb!1 >= 2!	&  ist \verb!1! größer gleich \verb!2!? &  \verb!FALSE!             \tabularnewline
+\verb!1 < 2!	&  ist \verb!1! kleiner \verb!2!? &  \verb!TRUE!         \tabularnewline
+\verb!1 <= 2!	&  ist \verb!1! kleiner gleich \verb!2!? & \verb!TRUE!   \tabularnewline
+\hline
+\end{tabular}
+\end{small}
+\end{table}
+
+Die in der Tabelle \ref{tab:logische_abfragen} beschriebenen Abfragen geben die Werte \verb!TRUE! oder \verb!FALSE! zurück. Dies sind die in \R{} definierten logischen Konstanten, die für \emph{wahr} und \emph{falsch} stehen. Wie aus der Oberstufenmathematik bekannt, kann man Wahr- und Falschaussagen mit dem logischen \emph{UND} und \emph{ODER} verknüpfen. So kann man fragen: Ist A \emph{und} B wahr? Dies ist nur dann der Fall, wenn beide Werte \emph{wahr} sind. Würde ich Sie zum Beispiel bitten, Ihre Hand zu heben, wenn Sie älter als 20 Jahre sind \emph{und} aus dem Norden von Deutschland kommen, würden sie dies nur dann tun, wenn beide Eigenschaften auf Sie zutreffen. Es handelt sich hierbei um ein logische \emph{UND}-Verknüpfung. Das logische \emph{ODER} funktioniert analog: Ist A \emph{oder} B wahr? Dies ist dann der Fall, wenn \emph{mindestens einer} der Werte \emph{wahr} ist. Würde ich Sie bitten, Ihre Hand zu heben, wenn sie über 20 Jahre alt sind \emph{oder} aus dem Norden kommen, würden Sie dies tun, auch nur eine der Eigenschaften auf Sie zutrifft. In \R{} stehen für die beiden Verknüpfugstypen die logischen Operatoren \verb!&! (logisches UND) und \verb!|! (logisches ODER) zur Verfügung. Die Verknüpfungen, die möglich sind, sind in Tabelle \ref{tab:logische_verknuepfungen} dargestellt.
+
+% logische Verknüpfungen
+\begin{table}[h]
+  \centering
+  \caption{Logische Verknüpfungen.}
+  \label{tab:logische_verknuepfungen}
+\begin{small}
+\begin{tabular}{lll}
+\hline
+Werte & Beschreibung  & Ergebnis    \tabularnewline
+\hline
+\verb!TRUE & TRUE!	& sind beide Werte wahr? & \verb!TRUE!     \tabularnewline
+\verb!TRUE & FALSE!	& sind beide Werte wahr? & \verb!FALSE!     \tabularnewline
+\verb!FALSE & TRUE!	& sind beide Werte wahr? & \verb!FALSE!     \tabularnewline
+\verb!FALSE & FALSE!	& sind beide Werte wahr? & \verb!FALSE!     \tabularnewline
+\verb!TRUE | TRUE!	& ist mindestens einer der Werte wahr? & \verb!TRUE!     \tabularnewline
+\verb!TRUE | FALSE!	& ist mindestens einer der Werte wahr? & \verb!TRUE!     \tabularnewline 
+\verb!FALSE | TRUE!	& ist mindestens einer der Werte wahr? & \verb!TRUE!     \tabularnewline 
+\verb!FALSE | FALSE!	& ist mindestens einer der Werte wahr? & \verb!FALSE!     \tabularnewline 
+\hline
+\end{tabular}
+\end{small}
+\end{table}
+
+Eingangs haben wir gesagt, dass logische Operationen dabei helfen, komplexe Fragen zu konstruieren. Wie können wir mit dem bisherigen Wissen eine logische Frage konstruieren? Nehmen wir an, wir haben eine Person mit einem IQ von 120 und einem Extraversionswert von 90. Wir wollen nun z.\,B. wissen, ob die Person beim IQ und beim Extraversionswert über dem Mittel von 100 liegt.
+
+\begin{Schunk}
+\begin{Sinput}
+> iq <- 120         # IQ sei 100
+> extra <- 90       # Extraversion sei 90
+\end{Sinput}
+\end{Schunk}
+
+\begin{Schunk}
+\begin{Sinput}
+> iq > 100          # ist der IQ größer 100?
+\end{Sinput}
+\begin{Soutput}
+[1] TRUE
+\end{Soutput}
+\begin{Sinput}
+> extra > 100       # ist Extraversion größer 100?
+\end{Sinput}
+\begin{Soutput}
+[1] FALSE
+\end{Soutput}
+\end{Schunk}
+ 
+Diese beiden logischen Abfragen können zu einer einzigen logischen Abfrage gemäß Tabelle \ref{tab:logische_verknuepfungen} kombiniert werden. Die Klammern sind hierbei nicht zwingend notwendig. Sie dienen in dem Beispiel nur zur Verdeutlichung.  
+
+\begin{Schunk}
+\begin{Sinput}
+> (iq > 100) & (extra > 100)   # ist der IQ und die Extraversion größer 100?
+\end{Sinput}
+\begin{Soutput}
+[1] FALSE
+\end{Soutput}
+\end{Schunk}
+
+Da die Person nicht bei beiden Werten über dem Durchschnitt 100 liegt wird der Wert \verb!FALSE! zurückgegeben (denn \verb!TRUE & FALSE! ergibt \verb!FALSE!).
+
+Neben den Konstanten \verb!TRUE! und \verb!FALSE! stehen in \R{} die Kurzformen \verb!T! und \verb!F! zur Verfügung, die alternativ verwendet werden können. Der Übersicht halber ist es jedoch ratsam, \texttt{TRUE} und \texttt{FALSE}  auszuschreiben.
+
+\begin{Schunk}
+\begin{Sinput}
+> T & T   
+\end{Sinput}
+\begin{Soutput}
+[1] TRUE
+\end{Soutput}
+\begin{Sinput}
+> F | T
+\end{Sinput}
+\begin{Soutput}
+[1] TRUE
+\end{Soutput}
+\end{Schunk}
+
+Eine weiterer wichtiger logischer Operator ist die logische Negation. Ein logischer Ausdruck (\texttt{TRUE} oder \texttt{FALSE}) kann durch das Voranstellen eines Ausrufezeichens in sein Gegenteil verwandelt werden. Die Negation von \emph{TRUE} ist \emph{FALSE} und umgekehrt. 
+
+\begin{Schunk}
+\begin{Sinput}
+> ! TRUE
+\end{Sinput}
+\begin{Soutput}
+[1] FALSE
+\end{Soutput}
+\begin{Sinput}
+> ! FALSE
+\end{Sinput}
+\begin{Soutput}
+[1] TRUE
+\end{Soutput}
+\begin{Sinput}
+> ! TRUE | FALSE
+\end{Sinput}
+\begin{Soutput}
+[1] FALSE
+\end{Soutput}
+\end{Schunk}
+
+Wir werden später sehen, dass der Operator häufig verwendet wird, um zu testen, ob eine bestimmte logische Aussage (z.\,B. \texttt{iq > 100}) zutrifft und wenn dies nicht der Fall ist, entsprechend zu handeln. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         
+
+\section{Funktionen}   \label{sec:funktionen}                           
+
+\subsection{Argumente und ihre Reihenfolge}  \label{sec:argumente_reihenfolge}                          
+
+Bisher haben wir verschiedene Operatoren (\verb!+, -, &, |! etc.) kennengelernt, die z.\,B. eine Addition, Subtraktion etc. durchführen. Neben diesen grundlegenden Operatoren verfügt \R{} über einen immensen Umfang an weiteren \emph{Funktionen}, die jeweils spezielle Aufgaben übernehmen. Das Wort \emph{Funktion} (lat. functio) heißt übersetzt soviel wie \emph{Tätigkeit} oder \emph{Verrichtung}. Eine Funktion ist also ein Objekt, das eine Tätigkeit durchführt. Eine solche Tätigkeit könnten z.\,B. die Berechnung einer Summe, einer Varianz, einer Regression, einer Faktorenanalyse usw. sein. Nahezu alles, was in \R{} geschieht, wird mittels einer Funktion vollzogen. 
+
+Funktionen sind in \R{} stets daran zu erkennen, dass sie ein bestimmtes Format haben. Es steht zuerst der Name der Funktion. Danach folgt eine öffnende runde Klammer (\verb!(!), dann ggf. diverse weitere Ausdrücke und zum Schluss eine schließende runde Klammer (\verb!)!). Wann immer einem in \R{} \emph{runde} Klammern begegnen, so wird es sich um eine Funktion handeln.\footnote{Es sei angemerkt, dass nicht alle Funktionsaufrufe über runde Klammern erfolgen. Auch das Plus-Zeichen ist eine Funktion. Zum jetzigen Zeitpunkt ist es jedoch ausreichend, alle Befehle, die eine runde Klammern nutzen, als Funktionen zu identifizieren.}
+
+\begin{Schunk}
+\begin{Sinput}
+>    funktionsname(argument_1, argument_2)
+\end{Sinput}
+\end{Schunk}
+
+Innerhalb der runden Klammern kann eine Funktion sog. \emph{Argumente} entgegennehmen. Diese geben der Funktion genaue Anweisungen darüber, wie sie ihre Verrichtung ausführen soll. 
+
+Um ein besseres Verständnis von dem Begriff \emph{Funktion} und \emph{Argument} zu erlangen, kann man sich z.B. einen Audio-Verstärker vorstellen. Dieser erfüllt die Funktion (Verrichtung) Sound zu erzeugen. Der Verstärker erhält hierzu ein Eingangssignal (z.\,B. von einem MP3-Player), das er verstärkt. Darüber hinaus verfügt er i.\,d.\,R. über diverse Einstellungsknöpfe, um z.\,B., die Lautstärke oder die Klangfarbe einzustellen. Das Eingangssignal und die Einstellungen der Knöpfe sind übertragen auf den Begriff Funktion die \emph{Argumente}. Argumente sind all das, was als Information in eine Funktion hineingegeben wird. Man sieht an diesem Beispiel, dass die Argumente somit zum einen den Input (Eingangssignal) enthalten als auch Möglichkeiten zur Feineinstellung (Lautstärke, Klangfarbe) bieten. Es hängt nun von den einzelnen Argumenten ab, wie genau die Verrichtung “Verstärkung” ausgeführt wird (welches Lied, laut oder leise, viel Bass oder viele Höhen). Dies ist in \R{} ebenso: Die Argumente regeln, was genau eine Funktion tut.
+
+Schauen wir uns zunächst die Funktion \verb!rnorm! an. Der Name der Funktion \verb!rnorm! steht für \emph{random normal}. Die Aufgabe der Funktion ist es, zufällige, normalverteilte Werte zu erzeugen. Innerhalb der Klammer erwartet die Funktion zumindest ein Argument das angibt, wie viele zufällige Werte erzeugt werden sollen. Die folgende Zeile Code erzeugt \emph{vier} zufällige Werte. 
+
+\begin{Schunk}
+\begin{Sinput}
+> rnorm(4)
+\end{Sinput}
+\begin{Soutput}
+[1]  1.6958543 -0.2974637 -0.3196555 -0.3618255
+\end{Soutput}
+\end{Schunk}
+
+Jedes Argument einer Funktion hat einen Namen, das mit in die Klammer eingefügt werden \emph{kann}. Hinter dem Namen eines Arguments steht ein Gleichheitszeichen, dahinter folgt der Wert für das Argument. Wir hätten im vorherigen Beispiel den Namen des Arguments hinzufügen können. Das Argument heißt \verb!n!.
+
+\begin{Schunk}
+\begin{Sinput}
+> rnorm(n=4)
+\end{Sinput}
+\begin{Soutput}
+[1] -0.06392804 -0.07807157  1.12227571  1.22757816
+\end{Soutput}
+\end{Schunk}
+
+Wie viele und welche Argumente eine Funktion entgegennimmt ist von Funktion zu Funktion verschieden. Die Funktion \verb!rnorm! kennt neben dem Argument \verb!n! noch die Argumente \verb!mean! und \verb!sd!. Dabei bezeichnet \verb!mean! das Zentrum und \verb!sd! die Standardabweichung der Normalverteilung, aus der die zufälligen Werte entnommen werden. Wenn eine Funktion mehrere Argumente hat werden diese stets durch  \emph{Kommata} voneinander getrennt. Nachfolgender Befehl erzeugt vier zufällige Wert, die aus einer Normalverteilung mit dem Mittelwert $100$ und einer Standardabweichung von $15$ entstammen.
+
+\begin{Schunk}
+\begin{Sinput}
+> rnorm(n=4, mean=100, sd=15)
+\end{Sinput}
+\begin{Soutput}
+[1] 130.08717  98.79369  87.26966 107.44485
+\end{Soutput}
+\end{Schunk}
+
+Welche Funktion welche Argumente hat und wie man dies herausfindet, wird im nächsten Kapitel ausführlich behandelt. Zunächst sollen jedoch am Beispiel von \texttt{rnorm} einige weitere grundlegende Eigeschaften von Funktionen und die Art und Weise wie man eine Funktion aufruft dargestellt werden. 
+
+Im vorletzten Code-Beispiel wurde die Funktion \texttt{rnorm} aufgerufen, ohne die Argumente \texttt{mean} oder \texttt{sd} anzugeben. Trotzdem hat die Funktion Werte ausgegeben. Der Grund dafür ist, dass beim Aufruf einer Funktion nicht alle, sondern nur jene Argumente angegeben werden müssen, für die keine \emph{Voreinstellung} vorhanden sind. Manche Funktionen brauchen sogar gar keine Argumente, so dass die runden Klammern dann komplett leer bleiben können.
+
+Im Falle von \texttt{rnorm} existieren für die Argumente \texttt{mean} und \texttt{sd} Voreinstellungen, so dass sie beim Aufruf der Funktion ausgelassen werden können. Die Argumente sind wie folgt voreingestellt: \verb!mean=0! und \verb!sd=1!.\footnote{Wie man diese herausfindet wird im folgenden Kapitel behandelt. Sie können jedoch dem Vorgreifen und den Befehl \texttt{args(rnorm)} schon einmal in die Konsole eingeben und den Output inspizieren.} Wird für ein Argument im Funktionsaufruf kein Wert angegeben, so wird die Voreinstellung verwendet. Für \texttt{rnorm} bedeutet dies, dass wenn \texttt{mean} und \texttt{sd} nicht angegeben werden, die Werte $0$ und $1$ verwendet werden. In diesem Fall werden dann zufällige Werte aus einer \emph{Standardnormalverteilung} (Mitte Null und Standardabweichung Eins) gezogen. 
+
+Rekapitulieren wir kurz: Wir haben bisher gesehen, dass eine Funktion über Argumente verfügt, denen im Funktionsaufruf ein Wert übergeben werden kann. Bei der Funktion \texttt{rnorm} sind es die drei Argumente \texttt{n}, \texttt{mean} und \texttt{sd} von denen zwei Voreinstellungen besitzen und wahlweise angeben werden können.
+
+\vspace*{5mm}
+\textbf{Reihenfolge von Argumenten}
+
+In \R{} ist es möglich, die Argumente in beliebiger Reihenfolge anzugeben. Alternativ zum letzten Befehl \texttt{rnorm(n=4, mean=100, sd=15)} hätte man auch Folgendes schreiben können. 
+
+\begin{Schunk}
+\begin{Sinput}
+> rnorm(sd=15, n=4, mean=100)
+\end{Sinput}
+\begin{Soutput}
+[1] 111.60205 101.47517  95.64032  94.54599
+\end{Soutput}
+\end{Schunk}
+
+Die beiden Befehle sind inhaltich identisch. Beachten Sie jedoch bitte, dass die erzeugten Werte bei jedem Aufruf der Funktion verschiedenen sind, da es sich stest um zufällig erzeugte Werte handelt.   
+        
+
+\vspace*{5mm}
+\textbf{Argumentenamen abkürzen oder weglassen}       
+
+Bisher wurden die Argumente einer Funktion stets mit dem vollen Namen benannt (z.B. \texttt{mean}). Es ist in \R{} erlaubt, die Argumentenamen abzukürzen, indem nur der erste oder die ersten Buchstaben des Namens ausgeschrieben werden (z.B. \texttt{me} für \texttt{mean}) oder den Namen ganz wegzulassen. 
+
+Betrachten wir zunächst den Fall der abgekürzten Argumentenamen. \R{} versucht abgekürzte Namen stets den vollen Namen der Argumente zuzuordnen. Würden wir z.\,B. nur \verb!m! anstelle von \verb!mean! schreiben, würde \R{} das \verb!m! automatisch als \verb!mean! deuten. Dies funktioniert jedoch nur dann, wenn die gewählte Abkürzung eindeutig ist und nicht zwei Argumente mit einem \verb!m! anfangen. Sonst könnte \R{} nicht unterscheiden, welches der beiden Argument mit der Abkürzung \verb!m! gemeint ist und würde einen Fehler erzeugen. Der nachfolgende Code ist identisch mit dem vorherigen, nur das die Namen der Argumente abgekürzt sind.  
+
+\begin{Schunk}
+\begin{Sinput}
+> rnorm(n=4, m=100, s=15)
+\end{Sinput}
+\begin{Soutput}
+[1]  79.19680 106.87702  97.01886  88.83495
+\end{Soutput}
+\end{Schunk}
+
+Neben der Nutzung von Abkürzungen ist es möglich als auch üblich, die Namen der Argumente ganz wegzulassen.\footnote{Wir haben dies im ersten Beispiel mit dem Befehl \texttt{rnorm(4)} bereits getan.} Denn für jede Funktion ist eine Standardreihenfolge der Argumente definiert. Bei \verb!rnorm! ist es: \verb!n!, \verb!mean!, \verb!sd!. Wenn die Namen der Argumente weggelassen werden, nimmt \R{} an, dass die Argumente genau in dieser Reihenfolge eingegeben werden. Der folgende Code entspricht somit genau dem vorherigen.
+
+\begin{Schunk}
+\begin{Sinput}
+> rnorm(4, 100, 15)
+\end{Sinput}
+\begin{Soutput}
+[1]  62.66397 102.63589  89.46351  81.30997
+\end{Soutput}
+\end{Schunk}
+
+Es ist wichtig zu beachten, dass die Reihenfolge der Argumente nur dann variiert werden kann, wenn die Namen der Argumente benutzt werden. Wenn die Namen weggelassen werden, muss die vorgegebene  Standardreihenfolge  der Argumente eingehalten werden! % Die existierenden Argumente und ihre Reihenfolge kann man sich durch die Funktion \verb!args! anzeigen lassen. Weitere Möglichkeit über die Argumente Kenntnisse zu erlangen folgen im nächsten Kapitel.
+% 
+% <<>>=
+% args(rnorm)
+% @                           
+
+Eine letzte Variante Argumente anzugeben ist, nur einige Argumente mit Namen anzugeben und andere in der richtigen  Standardreihenfolge  anzugeben. Im Folgenden wird das Argument \texttt{n} nicht namentlich benannt, da es sich um das erste in der Standardreihenfolge handelt. \texttt{sd} und \texttt{mean} sind benannt. Dies ist wichtig, da die Reihenfolge \texttt{sd}, \texttt{mean} nicht der definierten Standardreihenfolge entspricht.
+                                    
+\begin{Schunk}
+\begin{Sinput}
+> rnorm(4, sd=15, m=100)
+\end{Sinput}
+\begin{Soutput}
+[1] 100.96687 113.93101 106.93955  67.62886
+\end{Soutput}
+\end{Schunk}
+
+\vspace*{5mm}
+\textbf{Häufige Fehler} \\
+  
+Abschließend sei noch auf einen sehr häufig gemachten Fehler hingewiesen: die Kommata zwischen den Argumenten zu vergessen. Dies hat zur Folge, dass \R{} einen Fehler ausgibt.
+
+\begin{Schunk}
+\begin{Sinput}
+> rnorm(n=4  mean=100, sd=15)
+\end{Sinput}
+\end{Schunk}
+\vspace{-5mm}
+\begin{Schunk}
+\begin{Soutput}
+Fehler: Unerwartete(s) Symbol in "rnorm(n=4  mean"
+\end{Soutput}
+\end{Schunk}
+
+Überprüfen Sie beim Auftreten eines Fehler deshalb stets als erstes, ob die Syntax stimmt: Stehen alle Kommata am richtigen Ort? Wurde jede geöffnete Klammer auch wieder geschlossen? 90 \% der gemachten Fehler sind Syntaxfehler.
+
+    
+
+\subsection{Zurückgegebene Objekte einer Funktion}                            
+
+In \R{} gibt jede Funktion \emph{immer} ein Objekt (z.\,B. eine Zahl, eine Zeichenkette, einen logischen Wert etc.) zurück. Hiervon gibt es in \R{} \emph{keine} Ausnahme. Im letzten Beispiel hat die Funktion \texttt{rnorm} zufällige Werte zurückgegeben. Zwar mag es sein, dass eine Funktion ein Objekt nicht \emph{sichtbar} zurückgibt, wie z.\,B. die Funktion \verb!hist!, die ein Histogramm erzeugt. Dennoch gibt auch \verb!hist! ein Objekt zurück, das dann sichtbar wird, wenn man es in ein Objekt speichert und dieses in der Konsole ausgeben lässt.
+
+\begin{Schunk}
+\begin{Sinput}
+> a <- rnorm(100)
+> hist(a)
+> h <- hist(a)
+> h
+\end{Sinput}
+\end{Schunk}
+\vspace{-5mm}
+\begin{Schunk}
+\begin{Soutput}
+$breaks
+[1]  0  2  4  6  8 10
+
+$counts
+[1] 2 2 2 2 2
+   
+usw.  
+\end{Soutput} 
+\end{Schunk}
+
+Es ist an dieser Stelle nicht möglich und auch nicht von Bedeutung, diesen Output zu verstehen. Es ist nur wichtig im Hinterkopf zu behalten, dass jede Funktionen stets \emph{etwas} zurückgibt.
+
+Es kann weiterhin der Fall sein, dass eine Funktion ein sogenanntes \verb!NULL! Objekt zurückgibt. Dies bedeutet, dass die Funktion eigentlich nichts zurückgibt. Dass sie im Grunde nichts zurückgibt, zeigt sie an, indem Sie ein Objekt ohne Inhalt, ein sog. \verb!NULL!-Objekt zurückgibt. Trotzdem gibt ein Funktion \emph{immer} etwas, und sei es ein \verb!NULL!-Objekt, zurück.
+
+\begin{Schunk}
+\begin{Sinput}
+> plot(1:10)
+> p <- plot(1:10) 
+> p
+\end{Sinput}
+\end{Schunk}
+
+\vspace{-5mm}
+\begin{Schunk}
+\begin{Soutput}
+NULL 
+\end{Soutput} 
+\end{Schunk}
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Datensätze in \R{}}  \label{sec:datensaetze_in_r}
+
+In \R{} sind bereits mit der Installation diverse Beispieldatensätze verfügbar. Weitere Datensätze sind in vielen der zusätzlich installierten Pakete enthalten. Die mitgelieferten Datensätze können gut zum Ausprobieren genutzt werden. So müssen nicht erst extra Daten einlesen werden, um Funktionen auszuprobieren.
+
+Die Funktion \verb!data! listet alle Datensätze aus den Paketen auf, die zurzeit geladen sind (Abbildung \ref{fig:r_datasets}). Datensätze aus Paketen, die nicht geladen sind, werden nicht mit aufgeführt.\footnote{Um sich alle Datensätze, die verfügbar sind, d.\,h. auch jene aus Paketen, die nicht geladen sind, anzeigen zu lassen, kann ebenfalls die Funktion \texttt{data} genutzt werden. hierzu dient folgender Befehl: \texttt{data(package = .packages(all.available = TRUE))}. Dieser Befehl ist recht kompliziert und zu diesen Zeitpunkt noch nicht komplett nachvollziehbar. Er ist jedoch manchmal nützlich. }
+
+\begin{Schunk}
+\begin{Sinput}
+> data()
+\end{Sinput}
+\end{Schunk}
+
+% Datensätze in R
+\begin{figure}[h]
+\begin{center}
+  \includegraphics[width=1.0\textwidth]{pics/r_datasets\bw.png}
+  \vspace{-5mm}
+  \caption{Datensätze in \R{}.} 
+  \label{fig:r_datasets}
+\end{center}
+\end{figure}      
+
+
+Um einen Datensatz aus einem Paket zu nutzen, muss das Paket vorher geladen werden. Danach sind zwei Varianten möglich. Manche Pakete holen ihre Datensätze beim Laden des Pakets automatisch in den Speicher. So zum Beispiel das Paket \verb!ggplot2!. Nach dem Laden von \verb!ggplot2! ist der in dem Paket enthaltene Datensatz \verb!economics! direkt verfügbar, indem der Name des Datensatzes \verb!economics! in die Konsole eingegeben wird.
+
+\begin{Schunk}
+\begin{Sinput}
+> library(ggplot2)
+> economics
+\end{Sinput}
+\end{Schunk}
+
+\vspace{-5mm} 
+\begin{Schunk}
+\begin{Soutput}
+          date    pce    pop psavert uempmed unemploy
+1   1967-06-30  507.8 198712     9.8     4.5     2944
+2   1967-07-31  510.9 198911     9.8     4.7     2945
+3   1967-08-31  516.7 199113     9.0     4.6     2958
+...  
+ \end{Soutput} 
+\end{Schunk}
+    
+Bei anderen Paketen müssen die Datensätze zusätzlich in den Speicher geladen werden müssen, bevor sie verfügbar sind. So z.\,B. bei den Datensätzen aus dem Paket \verb!AER!. Dies geschieht ebenfalls mittels der Funktion \verb!data!. Der Name des zu ladenden Datensatzes wird als Argument angegeben, hier der Datensatz \verb!Affairs!. Der Datensatz ist erst nach dem Laden verfügbar.
+
+\begin{Schunk}
+\begin{Sinput}
+> library(AER)
+> Affairs
+\end{Sinput}
+\end{Schunk}   
+
+\vspace{-5mm}  
+\begin{Schunk}
+\begin{Soutput}
+Fehler: Objekt 'Affairs' nicht gefunden
+\end{Soutput} 
+\end{Schunk} 
+  
+\vspace{-5mm} 
+\begin{Schunk}
+\begin{Sinput}
+> data(Affairs)
+> Affairs 
+\end{Sinput}
+\end{Schunk} 
+
+\vspace{-5mm} 
+\begin{Schunk}
+\begin{Soutput}
+     affairs gender  age yearsmarried children religiousness
+4          0   male 37.0       10.000       no             3
+5          0 female 27.0        4.000       no             4
+11         0 female 32.0       15.000      yes             1
+...
+ \end{Soutput} 
+\end{Schunk} 
+
+% <<eval=false, keep.source=true>>=
+% library(AER)
+% Affairs           # noch nicht verfügbar
+% data(Affairs)
+% Affairs           # nach dem expliziten Laden verfügbar
+% @  
+
+In der Standardinstallation von \R{}, die das Paket \verb!datsets! enthält, sind bereits ca. $100$ Datensätze enthalten (siehe \verb!data()!). Diese müssen nicht noch extra geladen werden, bevor sie genutzt werden können. Alle Datensätze in \R{} verfügen über eine Dokumentation, die beschreibt, welche Bedeutung die Variablen haben. Wie auf diese zugegriffen wird ist im folgenden Kapitel beschrieben.
+
+
+
+ 
+ 
+
+
